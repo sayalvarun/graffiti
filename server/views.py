@@ -33,7 +33,8 @@ def logTag():
     longitude = flask.request.args.get("long")
     
     data = flask.request.get_data()
-    print(flask.request.data)
+    data = flask.request.data
+    print(data)
     #print(data)
     print("Received %s bytes" % len(data))
     '''
@@ -48,8 +49,8 @@ def logTag():
     print("(%s,%s)" % (latitude, longitude))
     '''
     try:
-        b_data = binascii.unhexlify(data)
-        stream = StringIO.StringIO(b_data)
+        #b_data = binascii.unhexlify(data)
+        stream = StringIO.StringIO(data)
         img = Image.open(stream)
         img.save("a_test.png")
         '''
