@@ -1,18 +1,21 @@
 PODS:
+  - ColorSlider (2.5.1)
   - jot (0.1.5):
     - Masonry (~> 0.6.1)
   - Masonry (0.6.4)
   - SnapKit (0.22.0)
 
 DEPENDENCIES:
+  - ColorSlider
   - jot
   - SnapKit
 
 SPEC CHECKSUMS:
+  ColorSlider: a9a198c4518d479808c9cb7af132191edb396bd5
   jot: 0f5dc333defa6ad805d01adc3834b201c22510a7
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
   SnapKit: 0dd2fd157330f1ea11fd84da13e6be8a7a22bae0
 
-PODFILE CHECKSUM: 0c3a39581660fb21ca3605ef85a57688e90eb37d
+PODFILE CHECKSUM: 80cfa832ce5e28a9f0dc926014d31c43318d4143
 
 COCOAPODS: 1.0.1
