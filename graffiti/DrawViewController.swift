@@ -26,12 +26,13 @@ class DrawViewController: JotViewController {
         
         self.state = JotViewState.Drawing
         self.drawingColor = UIColor.redColor()
+        
         self.requestManager = RequestManager()
-        //self.updatePictureBlock = {(image: UIImage) -> Void in
-        //    dispatch_async(dispatch_get_main_queue(), {
-        //        self.ImageView.image = image
-        //    })
-        //}
+//        self.updatePictureBlock = {(image: UIImage) -> Void in
+//            dispatch_async(dispatch_get_main_queue(), {
+//                self.ImageView.image = image
+//            })
+//        }
         
         requestManager!.getDoodle(self.updatePictureBlock)
     }

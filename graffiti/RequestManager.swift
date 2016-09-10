@@ -6,12 +6,16 @@
 //  Copyright © 2016 ___varun___. All rights reserved.
 //
 
-import UIKit
 
-class RequestManager: NSObject {
+import Darwin
+import UIKit
+import CoreLocation
+
+class RequestManager: NSObject,CLLocationManagerDelegate {
     
     var config : NSURLSessionConfiguration?
     var session: NSURLSession?
+    let locationManager = CLLocationManager()
     
     
     class var sharedInstance : RequestManager {
@@ -30,6 +34,14 @@ class RequestManager: NSObject {
         super.init()
         config = NSURLSessionConfiguration.defaultSessionConfiguration()
         session = NSURLSession(configuration: config!)
+        
+        // Get in use gps permissions
+        self.locationManager.requestAlwaysAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            self.locationManager.delegate = self
+            self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            self.locationManager.startUpdatingLocation()
+        }
     }
     
     func getDoodle(action: (image: UIImage) -> Void) {
@@ -48,10 +60,18 @@ class RequestManager: NSObject {
                 return
             }
             // make sure we got data
-            guard let responseData = data else {
+            guard var responseData = data else {
                 print("Error: did not receive data")
                 return
             }
+            
+            let subBytes = responseData.subdataWithRange(NSMakeRange(0, sizeof(UInt32)))
+            print(subBytes)
+            
+            var doodleID : Int32 = 0;
+            memcpy(&doodleID, responseData.bytes, sizeof(Int32))
+
+            responseData = NSData(bytes: responseData.bytes+sizeof(Int32), length: responseData.length-sizeof(Int32))
             
             if let image = UIImage(data: responseData, scale: 1.0)
             {
@@ -62,17 +82,45 @@ class RequestManager: NSObject {
         task.resume()
     }
     
+    func generateBoundaryString() -> String
+    {
+        return "Boundary-\(NSUUID().UUIDString)"
+    }
+    
     func tagDoodle(doodle: NSData){
-        let tagEndpoint: String = "http://varunsayal.com:5000/tag"
-        guard let tagUrl = NSURL(string: tagEndpoint) else {
+        
+        // Set up base URL
+        let urlComponents = NSURLComponents()
+        urlComponents.scheme = "http"
+        urlComponents.host = "varunsayal.com"
+        urlComponents.port = 5000
+        urlComponents.path = "/tag"
+        
+        guard let gpslocation = self.locationManager.location?.coordinate else{
+            print("Error: Could not get GPS coordinates")
+            return
+        }
+        // Grab lat long
+        let lat = gpslocation.latitude
+        let long = gpslocation.longitude
+        
+        // Create list of url components
+        let latQuery = NSURLQueryItem(name: "lat", value: String(lat))
+        let longQuery = NSURLQueryItem(name: "long", value: String(long))
+        urlComponents.queryItems = [latQuery, longQuery]
+        
+        guard let tagUrl = urlComponents.URL else {
             print("Error: cannot create URL")
             return
         }
-        let todosUrlRequest = NSMutableURLRequest(URL: tagUrl)
-        todosUrlRequest.HTTPMethod = "POST"
-        todosUrlRequest.HTTPBody = doodle
         
-        let task = self.session!.dataTaskWithRequest(todosUrlRequest) {
+        let doodleRequest = NSMutableURLRequest(URL: tagUrl)
+        doodleRequest.HTTPMethod = "POST"
+        
+        doodleRequest.setValue("application/octet-stream", forHTTPHeaderField: "Content-Type")
+        doodleRequest.HTTPBody = doodle
+        
+        let task = self.session!.dataTaskWithRequest(doodleRequest) {
             (data, response, error) in
             guard let responseData = data else {
                 print("Error: did not receive data")
