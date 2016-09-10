@@ -2,6 +2,7 @@ import flask
 import io
 import os
 import binascii
+import datetime
 from PIL import Image
 from server import server
 
@@ -32,6 +33,9 @@ def logTag():
     data = flask.request.get_data().replace(" ", "")
     data = data.replace("<", "")
     data = data.replace(">", "")
+    filename = "payload" + str(datetime.datetime.now()) + ".png"
+    with open(filename, "wb") as file:
+        file.write(data)
     
     print("(%s,%s)" % (latitude, longitude))
     #print(data)
