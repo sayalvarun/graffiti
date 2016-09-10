@@ -24,16 +24,20 @@
                                     <action selector="onSave:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Lr1-dg-EUi"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BmS-Ph-Nzh">
+                                <rect key="frame" x="20" y="53" width="280" height="377"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="ImageView" destination="BmS-Ph-Nzh" id="cbe-7S-Qb8"/>
                         <outlet property="saveButton" destination="cFP-oQ-19g" id="OwK-gH-icp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="130.66666666666666" y="328.01999999999998"/>
+            <point key="canvasLocation" x="130" y="328"/>
         </scene>
     </scenes>
 </document>

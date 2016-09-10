@@ -10,9 +10,16 @@ import UIKit
 import Masonry
 import jot
 
+
+
 class DrawViewController: UIViewController, JotViewControllerDelegate {
     
+    @IBOutlet weak var ImageView: UIImageView!
+    
     var jotController: JotViewController = JotViewController()
+    var requestManager: RequestManager?
+    var updatePictureBlock:(image: UIImage)->Void = { arg in }
+    
 
     @IBOutlet weak var saveButton: UIButton!
     
@@ -28,10 +35,23 @@ class DrawViewController: UIViewController, JotViewControllerDelegate {
         jotController.view.mas_makeConstraints { (make: MASConstraintMaker!) in
             make.edges.equalTo()
         }
+        self.requestManager = RequestManager()
+        self.updatePictureBlock = {(image: UIImage) -> Void in
+            dispatch_async(dispatch_get_main_queue(), {
+                self.ImageView.image = image
+            })
+        }
+        
+        requestManager!.getDoodle(self.updatePictureBlock)
+        
     }
 
     @IBAction func onSave(sender: AnyObject) {
-        
+        let image = UIImage(named: "fist")
+        if let data = UIImagePNGRepresentation(image!)
+        {
+            self.requestManager!.tagDoodle(data)
+        }
     }
     
     override func didReceiveMemoryWarning() {
