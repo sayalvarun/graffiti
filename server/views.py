@@ -42,7 +42,7 @@ def logTag():
         file.write(data)
     
     print("(%s,%s)" % (latitude, longitude))
-    #print(data)
+    
     try:
         b_data = binascii.unhexlify(data)
         stream = StringIO.StringIO(b_data)
@@ -56,7 +56,8 @@ def logTag():
     except Exception, e:
         print("ERROR: " + str(e))
         return "1" #error
-        
+    
+    print("DATA:" + data)    
     return "0" #ok
 
 def convert(num):
