@@ -30,7 +30,9 @@ def logTag():
     latitude = flask.request.args.get("lat")
     longitude = flask.request.args.get("long")
     
-    data = flask.request.get_data().replace(" ", "")
+    data = flask.request.get_data()
+    print("Received %s bytes" % len(data))
+    data = data.replace(" ", "")
     data = data.replace("<", "")
     data = data.replace(">", "")
     filename = "payload" + str(datetime.datetime.now()) + ".txt"
