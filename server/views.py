@@ -30,9 +30,9 @@ def logTag():
     longitude = flask.request.args.get("long")
     data = flask.request.get_data().replace(" ", "")
     print("(%s,%s)" % (latitude, longitude))
-    
+    #print(data)
     try:
-        img = binascii.a2b_hex(data)
+        img = binascii.a2b_hex(data.strip())
         with open('image.png', 'wb') as image_file:
             image_file.write(img)
     except Exception, e:
