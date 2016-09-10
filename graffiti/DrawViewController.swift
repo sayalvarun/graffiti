@@ -51,15 +51,5 @@ class DrawViewController: JotViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        if let touch = touches.first {
-            let position :CGPoint = touch.locationInView(view)
-            print(position.x)
-            print(position.y)
-        }
-        print(self.state.rawValue)
-    }
-
 }
 
