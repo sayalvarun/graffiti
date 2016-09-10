@@ -14,6 +14,8 @@ class DrawViewController: UIViewController, JotViewControllerDelegate {
     
     var jotController: JotViewController = JotViewController()
 
+    @IBOutlet weak var saveButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -28,6 +30,9 @@ class DrawViewController: UIViewController, JotViewControllerDelegate {
         }
     }
 
+    @IBAction func onSave(sender: AnyObject) {
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
