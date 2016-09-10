@@ -1,6 +1,7 @@
 import flask
 import io
 import os
+import binascii
 from PIL import Image
 from server import server
 
@@ -27,8 +28,18 @@ def sendImage():
 def logTag():
     latitude = flask.request.args.get("lat")
     longitude = flask.request.args.get("long")
-    data = flask.request.get_data()
-    print("(%s,%s) payload: %s" % (latitude, longitude, str(data)))
+    data = flask.request.get_data().replace(" ", "")
+    print("(%s,%s)" % (latitude, longitude))
+    
+    try:
+        img = binascii.a2b_hex(data)
+        with open('image.png', 'wb') as image_file:
+            image_file.write(img)
+    except(Exception, e):
+        print("ERROR: " + str(e))
+        return "1" #error
+
+    return "0" #ok
 
 def dump(n): 
     s = '%x' % n
