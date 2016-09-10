@@ -1,9 +1,12 @@
 import flask
+import base64
 import io
 import os
+import json
 import re
 import binascii
 import datetime
+
 import cStringIO as StringIO
 from PIL import Image
 from server import server
@@ -22,7 +25,9 @@ def sendImage():
             b = bytearray(f)
             num = 343251 # \x00\x05\x3C\xD3
             #print("343251 is " + num)
-            return jsonify(id=num, payload=b)
+	    encoded = base64.b64encode(b)
+	    print(binascii.hexlify(b))
+            return flask.jsonify({'id':str(num), 'payloadLength':len(b),'payload':encoded})
             #return (num + str(b))
     else:
         print("ERROR: file not found")
