@@ -10,48 +10,41 @@ import UIKit
 import Masonry
 import jot
 
-
-
-class DrawViewController: UIViewController, JotViewControllerDelegate {
+class DrawViewController: JotViewController {
     
-    @IBOutlet weak var ImageView: UIImageView!
-    
-    var jotController: JotViewController = JotViewController()
     var requestManager: RequestManager?
     var updatePictureBlock:(image: UIImage)->Void = { arg in }
-    
-
-    @IBOutlet weak var saveButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        jotController.delegate = self
-        jotController.state = JotViewState.Drawing
-        jotController.drawingColor = UIColor.blackColor()
-        self.addChildViewController(jotController)
-        self.view.addSubview(jotController.view)
-        jotController.didMoveToParentViewController(self)
-        jotController.view.mas_makeConstraints { (make: MASConstraintMaker!) in
-            make.edges.equalTo()
-        }
+        let button = UIButton(frame: CGRect(x: 100, y: 100, width: 100, height: 50))
+        button.setTitle("Save", forState: .Normal)
+        button.addTarget(self, action: #selector(onSave), forControlEvents: .TouchUpInside)
+        
+        self.view.addSubview(button)
+        
+        self.state = JotViewState.Drawing
+        self.drawingColor = UIColor.redColor()
         self.requestManager = RequestManager()
-        self.updatePictureBlock = {(image: UIImage) -> Void in
-            dispatch_async(dispatch_get_main_queue(), {
-                self.ImageView.image = image
-            })
-        }
+        //self.updatePictureBlock = {(image: UIImage) -> Void in
+        //    dispatch_async(dispatch_get_main_queue(), {
+        //        self.ImageView.image = image
+        //    })
+        //}
         
         requestManager!.getDoodle(self.updatePictureBlock)
-        
     }
-
+    
     @IBAction func onSave(sender: AnyObject) {
-        let image = UIImage(named: "fist")
-        if let data = UIImagePNGRepresentation(image!)
+        let doodle: UIImage = self.renderImageWithScale(2.0)
+        if let data = UIImagePNGRepresentation(doodle)
         {
             self.requestManager!.tagDoodle(data)
         }
+        UIImageWriteToSavedPhotosAlbum(doodle, nil, nil, nil)
+        self.clearAll()
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -59,6 +52,14 @@ class DrawViewController: UIViewController, JotViewControllerDelegate {
         // Dispose of any resources that can be recreated.
     }
 
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if let touch = touches.first {
+            let position :CGPoint = touch.locationInView(view)
+            print(position.x)
+            print(position.y)
+        }
+        print(self.state.rawValue)
+    }
 
 }
 
