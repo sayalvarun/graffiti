@@ -28,7 +28,11 @@ def sendImage():
 def logTag():
     latitude = flask.request.args.get("lat")
     longitude = flask.request.args.get("long")
+    
     data = flask.request.get_data().replace(" ", "")
+    data = data.replace("<", "")
+    data = data.replace(">", "")
+    
     print("(%s,%s)" % (latitude, longitude))
     #print(data)
     try:
