@@ -1,6 +1,7 @@
 import flask
 import io
 import os
+import re
 import binascii
 import datetime
 import cStringIO as StringIO
@@ -19,7 +20,7 @@ def sendImage():
         with open("server/file.jpg", "rb") as imageFile:
             f = imageFile.read()
             b = bytearray(f)
-            return str(dump(343251)).replace('\'', '') + str(b) #jank af
+            return str(convert(343251)) + str(b) 
     else:
         print("ERROR: file not found")
 
@@ -58,13 +59,5 @@ def logTag():
         
     return "0" #ok
 
-def dump(n): 
-    s = '%x' % n
-    if len(s) & 1:
-        s = '0' + s
-
-    decoded = s.decode('hex')
-    while len(decoded) != 4:
-        decoded = ('\x00' + decoded)
-
-    return repr(decoded)
+def convert(num):
+    return re.sub(r'([0-9A-F]{2})',r'\\x\1','%08X' % num)
