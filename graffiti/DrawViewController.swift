@@ -20,6 +20,7 @@ class DrawViewController: JotViewController {
     let closeButton: UIButton = UIButton()
     let strokeButton: UIButton = UIButton()
     let undoButton: UIButton = UIButton()
+    let sendButton: UIButton = UIButton()
     let colorSlider: ColorSlider! = ColorSlider()
     let colorButton: UIButton = UIButton(type: .Custom)
     
@@ -121,6 +122,16 @@ class DrawViewController: JotViewController {
             //make.bottom.equalTo()(self.view).with().offset()(-4.0)
         }
         
+        //set up send button
+        sendButton.hidden = true
+        sendButton.setTitle("Send", forState: .Normal)
+        sendButton.addTarget(self, action: #selector(onSend), forControlEvents: .TouchUpInside)
+        self.view.addSubview(sendButton)
+        sendButton.snp_makeConstraints { (make) -> Void in
+            make.bottom.equalTo(self.view).offset(-20)
+            make.right.equalTo(self.view).offset(-20)
+        }
+        
         //set up save button
         saveButton.hidden = true
         saveButton.setTitle("Save", forState: .Normal)
@@ -129,7 +140,7 @@ class DrawViewController: JotViewController {
         
         saveButton.snp_makeConstraints { (make) -> Void in
             make.bottom.equalTo(self.view).offset(-20)
-            make.centerX.equalTo(self.view)
+            make.left.equalTo(self.view).offset(20)
         }
 
         //set state of drawing view
@@ -139,13 +150,6 @@ class DrawViewController: JotViewController {
     }
 
     @IBAction func onDraw(sender: AnyObject) {
-        //let doodle: UIImage = self.renderImageWithScale(2.0)
-        //if let data = UIImagePNGRepresentation(doodle)
-        //{
-        //    self.requestManager!.tagDoodle(data)
-        //}
-        //UIImageWriteToSavedPhotosAlbum(doodle, nil, nil, nil)
-        //self.clearAll()
         imageView.image = nil
         self.state = JotViewState.Drawing
         self.toggleDrawing()
@@ -163,8 +167,21 @@ class DrawViewController: JotViewController {
         UIImageWriteToSavedPhotosAlbum(screenshot, nil, nil, nil)
     }
     
+    @IBAction func onSend(sender: AnyObject) {
+        let scale = UIScreen.mainScreen().scale
+        let doodle: UIImage = self.renderImageWithScale(scale)
+        if let data = UIImagePNGRepresentation(doodle)
+        {
+            self.requestManager!.tagDoodle(data)
+        }
+        self.state = JotViewState.Default
+        self.onClose(NSNull)
+    }
+    
     @IBAction func onClose(sender: AnyObject) {
         self.clearAll()
+        colorSlider.hidden = true
+        self.state = JotViewState.Default
         self.toggleDrawing()
     }
     
@@ -200,6 +217,7 @@ class DrawViewController: JotViewController {
         closeButton.hidden = !(closeButton.hidden)
         undoButton.hidden = !(undoButton.hidden)
         colorButton.hidden = !(colorButton.hidden)
+        sendButton.hidden = !(sendButton.hidden)
     }
 
     
