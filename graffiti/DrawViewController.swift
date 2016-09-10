@@ -16,9 +16,9 @@ class DrawViewController: JotViewController {
 
     var requestManager: RequestManager?
     var updatePictureBlock:(image: UIImage)->Void = { arg in }
-    var imageView : UIImageView?
+    var imageView : UIImageView!
     var colorSlider: ColorSlider! = ColorSlider()
-    var colorButton: UIButton = UIButton()
+    var colorButton: UIButton = UIButton(type: .Custom)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +26,7 @@ class DrawViewController: JotViewController {
         
         
         self.imageView = UIImageView(frame: CGRect(x: 75, y: 150, width: 200, height: 400))
+        imageView!.frame = self.view.frame
         
         self.view.addSubview(self.imageView!)
         
@@ -39,6 +40,7 @@ class DrawViewController: JotViewController {
             make.top.equalTo(self.view).offset(20)
             make.left.equalTo(self.view).offset(20)
         }
+        
         
         //set up undo button
         let undoButton = UIButton()
@@ -63,10 +65,20 @@ class DrawViewController: JotViewController {
         }
         
         //set up color buttons
-        colorButton.setTitle("Color", forState: .Normal)
+        if let image = UIImage(named: "spray-can") {
+            print(image)
+            colorButton.setImage(image, forState: .Normal)
+        }
+        colorButton.backgroundColor = UIColor.clearColor()
+        colorButton.layer.cornerRadius = 5
+        colorButton.layer.borderWidth = 2
+        colorButton.layer.borderColor = UIColor.whiteColor().CGColor
+
+        
         colorButton.addTarget(self, action: #selector(onColor), forControlEvents: .TouchUpInside)
         self.view.addSubview(colorButton)
         
+    
         colorButton.snp_makeConstraints { (make) -> Void in
             make.top.equalTo(self.view).offset(20)
             make.right.equalTo(self.view).offset(-20)
@@ -140,7 +152,7 @@ class DrawViewController: JotViewController {
     }
     
     @IBAction func onColor(sender: AnyObject) {
-        colorSlider.hidden = false
+        colorSlider.hidden = !(colorSlider.hidden)
     }
 
     
