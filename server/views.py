@@ -1,7 +1,6 @@
 import flask
 import io
 import os
-import requests
 from PIL import Image
 from server import server
 
@@ -26,16 +25,10 @@ def sendImage():
 
 @server.route('/tag', methods = ['POST'])
 def logTag():
-    file = request.files['file']
-    if file:
-        filename = secure_filename(file.filename)
-        print("filename: " + str(filename))
-        #file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        file.save(filename)
-        return filename
-    else:
-        print("ERROR: No File")
-        return None
+    latitude = flask.request.args.get("lat")
+    longitude = flask.request.args.get("long")
+    data = flask.request.get_data()
+    print("(%s,%s) payload: %s" % (latitude, longitude, str(data)))
 
 def dump(n): 
     s = '%x' % n
