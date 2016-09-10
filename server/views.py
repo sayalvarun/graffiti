@@ -20,7 +20,10 @@ def sendImage():
         with open("server/file.jpg", "rb") as imageFile:
             f = imageFile.read()
             b = bytearray(f)
-            return str(convert(343251)) + str(b) 
+            num = 343251 # \x00\x05\x3C\xD3
+            #print("343251 is " + num)
+            return jsonify(id=num, payload=b)
+            #return (num + str(b))
     else:
         print("ERROR: file not found")
 
@@ -31,38 +34,19 @@ def sendImage():
 def logTag():
     latitude = flask.request.args.get("lat")
     longitude = flask.request.args.get("long")
-    
     data = flask.request.get_data()
-    data = flask.request.data
-    print(data)
     #print(data)
-    print("Received %s bytes" % len(data))
-    '''
-    data = data.replace(" ", "")
-    data = data.replace("<", "")
-    data = data.replace(">", "")
-
-    filename = "payload" + str(datetime.datetime.now()) + ".txt"
-    with open(filename, "wb") as file:
-        file.write(data)
-    
-    print("(%s,%s)" % (latitude, longitude))
-    '''
+    #print("Received %s bytes" % len(data))
+    #print("(%s,%s)" % (latitude, longitude))
     try:
         #b_data = binascii.unhexlify(data)
         stream = StringIO.StringIO(data)
         img = Image.open(stream)
-        img.save("a_test.png")
-        '''
-        img = binascii.a2b_hex(data.strip())
-        with open('image.png', 'wb') as image_file:
-            image_file.write(img)
-        '''
+        img.save("image.png")
     except Exception, e:
         print("ERROR: " + str(e))
         return "1" #error
     
-    print("DATA:" + data)    
     return "0" #ok
 
 def convert(num):

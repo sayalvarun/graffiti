@@ -21,9 +21,7 @@ class MainViewController: UIViewController, JotViewControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let drawViewController = storyboard.instantiateViewControllerWithIdentifier("DrawView") as! DrawViewController
-        //let drawViewController = DrawViewController()
+        let drawViewController = DrawViewController()
         drawViewController.delegate = self
        
         
