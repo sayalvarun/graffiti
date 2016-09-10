@@ -14,13 +14,18 @@ import SnapKit
 class DrawViewController: JotViewController {
 
     var requestManager: RequestManager?
-    var updatePictureBlock:(image: UIImage)->Void = { arg in }
+    var updatePictureBlock:(doodle: Doodle)->Void = { arg in }
     var imageView : UIImageView?
+    var currentDoodleID : Int32 = 0 // Stores the id of the doodle on the screen if any
+    var bufferedDoodles : [Doodle] = []
+    var gettingDoodlesSemaphore : dispatch_semaphore_t = dispatch_semaphore_create(0)
+    let kSemaphoreWaitTime : Int64 = 15 // Wait for 15 seconds for the semaphore
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
         
         self.imageView = UIImageView(frame: CGRect(x: 75, y: 150, width: 200, height: 400))
         
@@ -60,19 +65,26 @@ class DrawViewController: JotViewController {
             //make.bottom.equalTo()(self.view).with().offset()(-4.0)
         }
 
-
         //set state of drawing view
         self.state = JotViewState.Drawing
         self.drawingColor = UIColor.redColor()
 
         self.requestManager = RequestManager()
-        self.updatePictureBlock = {(image: UIImage) -> Void in
+        self.updatePictureBlock = {(doodle: Doodle) -> Void in
             dispatch_async(dispatch_get_main_queue(), {
-                self.imageView!.image = image
+                self.bufferedDoodles.append(doodle)
             })
         }
         
-        requestManager!.getDoodle(self.updatePictureBlock)
+        requestDoodles()
+    }
+    
+    /* Makes an async request to the server asking for all nearby doodles and adds them to the
+    *  bufferedDoodles. Needs to be called again when we exhaust all the doodles
+    */
+    func requestDoodles() {
+        requestManager!.getDoodle(self.updatePictureBlock, semaphore: self.gettingDoodlesSemaphore)
+        dispatch_semaphore_wait(self.gettingDoodlesSemaphore, dispatch_time(DISPATCH_TIME_NOW, self.kSemaphoreWaitTime))
     }
 
     @IBAction func onSave(sender: AnyObject) {
