@@ -86,6 +86,7 @@ class DrawViewController: JotViewController {
     }
     
     @IBAction func onUndo(sender: AnyObject) {
+        self.undo()
     }
 
     override func didReceiveMemoryWarning() {
