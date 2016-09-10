@@ -33,7 +33,7 @@ def logTag():
     data = flask.request.get_data().replace(" ", "")
     data = data.replace("<", "")
     data = data.replace(">", "")
-    filename = "payload" + str(datetime.datetime.now()) + ".png"
+    filename = "payload" + str(datetime.datetime.now()) + ".txt"
     with open(filename, "wb") as file:
         file.write(data)
     
