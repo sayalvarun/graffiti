@@ -3,6 +3,7 @@ import io
 import os
 import binascii
 import datetime
+import cStringIO as StringIO
 from PIL import Image
 from server import server
 
@@ -42,13 +43,19 @@ def logTag():
     print("(%s,%s)" % (latitude, longitude))
     #print(data)
     try:
+        b_data = binascii.unhexlify(data)
+        stream = StringIO.StringIO(b_data)
+        img = Image.open(stream)
+        img.save("a_test.png")
+        '''
         img = binascii.a2b_hex(data.strip())
         with open('image.png', 'wb') as image_file:
             image_file.write(img)
+        '''
     except Exception, e:
         print("ERROR: " + str(e))
         return "1" #error
-
+        
     return "0" #ok
 
 def dump(n): 
