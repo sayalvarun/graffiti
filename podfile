@@ -7,4 +7,5 @@ target 'graffiti' do
 
   # Pods for graffiti
 	pod 'jot'
+	pod 'SnapKit'
 end
