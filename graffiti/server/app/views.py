@@ -6,6 +6,10 @@ from app import app
 def index():
     return "Hello, World!"
 
-@app.route('/image')
+@app.route('/doodle')
 def sendImage():
     return flask.send_file('file.jpg')
+
+@app.route('/tag')
+def sendImage():
+    return "Hello, World!"
