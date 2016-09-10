@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  graffiti
 //
-//  Created by Varun Sayal on 9/9/16.
-//  Copyright © 2016 ___varun___. All rights reserved.
+//  Created by Philippe Kimura-Thollander on 9/9/16.
+//  Copyright © 2016 Philippe Kimura-Thollander. All rights reserved.
 //
 
 import UIKit

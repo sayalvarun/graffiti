@@ -21,20 +21,16 @@
 		45C640E4A4547778A8A7C6266F211389 /* jot.h in Headers */ = {isa = PBXBuildFile; fileRef = DA02EF6077A91B6DED6E2B2BFB1FEAF4 /* jot.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5B7447C38AA7F582820D4AFE0C058D6C /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE45DB28764D6A3BCBE53CA3B9E3848 /* ViewController+MASAdditions.m */; };
 		65C34937F14828F3356C9FF0D48D4F9B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D18823C024AED1F2C64F6757FBB3D16 /* Foundation.framework */; };
-		67F9447D0268E8A45529C32AF0DCFC1A /* Pods-graffitiTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B36D4246E62FE7C17538FF0AF3A79DAA /* Pods-graffitiTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6998A34C7ED92B5FB16E60E056EF7436 /* jot-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E3987FDFC33F6395F1A1B4F554489871 /* jot-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6B0304DEFE5D19FF6AF78D7B4B894B2F /* Pods-graffiti-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 677F3073F36C9588034A8128B4BD9861 /* Pods-graffiti-dummy.m */; };
+		6B0304DEFE5D19FF6AF78D7B4B894B2F /* Pods-graffiti-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C84DC872955B6320C6E22F1A01A290 /* Pods-graffiti-dummy.m */; };
 		6CFD0C6750D24BD60186109C8805E5B2 /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C8B161101A65E7C95F8EF3959AA4253 /* MASConstraint.m */; };
 		6EAF09E02791B18E61E5571ED87EF39C /* UIImage+Jot.h in Headers */ = {isa = PBXBuildFile; fileRef = 93B05C6F324F183C370CED4CCAD9CB04 /* UIImage+Jot.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6EE6C01740DE93869BA36912AAA1D71B /* JotDrawView.h in Headers */ = {isa = PBXBuildFile; fileRef = D95DD7AD298972270F8F2DE000CF65F2 /* JotDrawView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6F9126F8F93DF55A103958E4DBD21CE2 /* Pods-graffitiUITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B8E586088A8ABE12F7CF2EB3707317C /* Pods-graffitiUITests-dummy.m */; };
 		70C77DFC5D670E0DB11D6523D3D87BC6 /* Masonry-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D170A5772F0E5A4CA1D6FF26009988AA /* Masonry-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		72B5E43B58A88D4593076B1DC08AA3E7 /* JotTextEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = E04ECF9969720C861C73E0B8EBB12C1A /* JotTextEditView.m */; settings = {COMPILER_FLAGS = "-fmodules"; }; };
 		73C4851EAA8FC9CE5D3A375AD9DD9869 /* JotTouchPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EFD4EC7FD1AE779100F83ECC30DE5E3 /* JotTouchPoint.m */; settings = {COMPILER_FLAGS = "-fmodules"; }; };
 		85FD7EED07F37B854118842B45A67D43 /* MASConstraint+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C02236F91211034746A3AE4CE25F998 /* MASConstraint+Private.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		872E5204EBAA42E9E4137FD399C9DE7B /* MASViewAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 183C6296DDE666A2744A20AB604CF6B4 /* MASViewAttribute.m */; };
-		894038C1675624DF8DADFA08E6308E3E /* Pods-graffitiUITests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3141546D5914707A650702FD1E5DDF10 /* Pods-graffitiUITests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8DCCD47890192ED9934188519230401E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D18823C024AED1F2C64F6757FBB3D16 /* Foundation.framework */; };
 		9DE48AA9C6C0CB60F84C7A534B50F1B1 /* JotViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 23FDA47B0FE254B8863E7366386E0486 /* JotViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9F3D831FD5CACF17CC3B0C0B8FA52D00 /* UIImage+Jot.m in Sources */ = {isa = PBXBuildFile; fileRef = D217AD401B087E4B79C29440D725288B /* UIImage+Jot.m */; settings = {COMPILER_FLAGS = "-fmodules"; }; };
 		A19C0FEB5EBB08A2AAF5E35A83CD59CF /* View+MASShorthandAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 4714FB784DEA534F5E8519D829F12254 /* View+MASShorthandAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -51,17 +47,15 @@
 		C2DF6AC31AD795AFF31CAD1C0A894D7F /* JotDrawingContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 863890C26E00B718C0517F79E9D47B19 /* JotDrawingContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C447C9832ED60CA94E624462596436B4 /* Masonry.h in Headers */ = {isa = PBXBuildFile; fileRef = F77ECE1001940B423B3B63D0E792D34A /* Masonry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C98140A222BEB55B30F885510DB86456 /* ViewController+MASAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C4EC17009C2E5337B887CA7FD7B5162 /* ViewController+MASAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D7F55F1B19E2607D71ED443FC43EED08 /* Pods-graffitiTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E6207EDD395E0359CFEDDC3031F30BD8 /* Pods-graffitiTests-dummy.m */; };
 		D8DE1CD5A2A2FE6BA9FDF84494C563CA /* JotTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = DFA4CE1EE1D17974C770FBB7D800CD7C /* JotTextView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D92B10C90A758D98ED65E39BD48CED74 /* NSArray+MASShorthandAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 5174720C09CB290EAAC1F2250EE05D48 /* NSArray+MASShorthandAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E00795E68DC2F5C14CB56A486386D6E2 /* JotDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4103CF86F5A48398383570BE67E400BA /* JotDrawView.m */; settings = {COMPILER_FLAGS = "-fmodules"; }; };
-		E350D5492453C760C75B18652E388C95 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D18823C024AED1F2C64F6757FBB3D16 /* Foundation.framework */; };
 		E717AB05650879016F5856C9311F23D3 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5501892438C39B33C9AB40E66EE73C89 /* NSLayoutConstraint+MASDebugAdditions.m */; };
 		E7C713E702008A7F31FFA0DD1CF50D5A /* MASViewConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2237728191D8560247C97497944663 /* MASViewConstraint.m */; };
 		E9917C113D948A5B5FC0F297A43BA983 /* NSArray+MASAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FD1253F01BE7C6F42BD7472B95C69BC /* NSArray+MASAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E9D639C9DAC3239BEB50C258918026BC /* MASConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = C68AE7F89199B9C1E6D55399B81B96AF /* MASConstraint.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EE46DD1183915215A753AAC61754CA42 /* MASViewConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = E496A66B919B336032FE819283BF83B8 /* MASViewConstraint.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EF0035AD7957A7BC23A3712373BF11CC /* Pods-graffiti-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B60DA3C9A9758F904D5D610F013E66B6 /* Pods-graffiti-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EF0035AD7957A7BC23A3712373BF11CC /* Pods-graffiti-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CE4142EDBC7D7D037BA7B39552442558 /* Pods-graffiti-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EFAE8B0B2F498E589D8AA0F6B2243CDB /* JotTouchPoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 71F9E407C13F4AD9F6A0584A6DE82DD9 /* JotTouchPoint.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F1509220863D5DAAAD0B68AD8F8833D1 /* JotTouchBezier.h in Headers */ = {isa = PBXBuildFile; fileRef = D93BEDA713AE5B65F801CB5553090074 /* JotTouchBezier.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F290435DF37C99969C82AF4100C1E807 /* JotTextEditView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D223DDC77C9CADADA334D18FF15615F /* JotTextEditView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -95,98 +89,76 @@
 
 /* Begin PBXFileReference section */
 		017FF81081D4CFB09455EC28F46DC945 /* View+MASAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "View+MASAdditions.m"; path = "Masonry/View+MASAdditions.m"; sourceTree = "<group>"; };
-		05CCBEC237846ADEC3A64EDE7DCB57DE /* Pods-graffiti-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-graffiti-frameworks.sh"; sourceTree = "<group>"; };
+		0A93E65DB46BDA3BD387C67B0C9CBB8C /* Pods-graffiti-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-graffiti-acknowledgements.markdown"; sourceTree = "<group>"; };
 		0C8B161101A65E7C95F8EF3959AA4253 /* MASConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASConstraint.m; path = Masonry/MASConstraint.m; sourceTree = "<group>"; };
 		0EED3FF5978EF43775B8B27EDD03A6D4 /* JotTouchBezier.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JotTouchBezier.m; path = jot/JotTouchBezier.m; sourceTree = "<group>"; };
 		0EFD4EC7FD1AE779100F83ECC30DE5E3 /* JotTouchPoint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JotTouchPoint.m; path = jot/JotTouchPoint.m; sourceTree = "<group>"; };
 		144C59B098C55C4057D210256C8D40B4 /* Masonry.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Masonry.xcconfig; sourceTree = "<group>"; };
 		183C6296DDE666A2744A20AB604CF6B4 /* MASViewAttribute.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASViewAttribute.m; path = Masonry/MASViewAttribute.m; sourceTree = "<group>"; };
-		1C56E15E94A49CA64877F6D5DC29E579 /* Pods-graffitiTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-graffitiTests-frameworks.sh"; sourceTree = "<group>"; };
-		2144B9253E301D082C6F0CDFFD8DB425 /* Pods-graffitiUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-graffitiUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		1BBB452F19787D3F3C4955303CE5245D /* Pods-graffiti.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-graffiti.debug.xcconfig"; sourceTree = "<group>"; };
+		1E1C526243BA2C99FF086F535D0C2197 /* Pods-graffiti-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-graffiti-resources.sh"; sourceTree = "<group>"; };
 		2231E3B9CE5BBF0BEFF6A8D613A4B58D /* JotViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JotViewController.m; path = jot/JotViewController.m; sourceTree = "<group>"; };
 		23FDA47B0FE254B8863E7366386E0486 /* JotViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JotViewController.h; path = jot/JotViewController.h; sourceTree = "<group>"; };
 		24D3EDE8803C2444E24055A5375E9B9B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		25ED70DAEA6CF76C022A159563B7665B /* Pods-graffiti-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-graffiti-resources.sh"; sourceTree = "<group>"; };
-		294A305C9E3225B805566B24EBB336FC /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		29917CCA383FAA87E0D9C2987D743130 /* Pods_graffiti.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_graffiti.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B2237728191D8560247C97497944663 /* MASViewConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASViewConstraint.m; path = Masonry/MASViewConstraint.m; sourceTree = "<group>"; };
-		2B409074F4740CEEF3AC995B424DB109 /* jot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = jot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2F3595EF523ACB662366190BC6AAB59C /* Masonry.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Masonry.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3141546D5914707A650702FD1E5DDF10 /* Pods-graffitiUITests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-graffitiUITests-umbrella.h"; sourceTree = "<group>"; };
-		33A4A542E5CB0E0C86A224EBBAE4C039 /* Pods-graffitiUITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-graffitiUITests-acknowledgements.plist"; sourceTree = "<group>"; };
 		358F65211591192DA6C046C0D963606E /* MASLayoutConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASLayoutConstraint.m; path = Masonry/MASLayoutConstraint.m; sourceTree = "<group>"; };
-		36A7821382021CD5884C83F0E4E4D628 /* Pods_graffiti.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_graffiti.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FD1253F01BE7C6F42BD7472B95C69BC /* NSArray+MASAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSArray+MASAdditions.h"; path = "Masonry/NSArray+MASAdditions.h"; sourceTree = "<group>"; };
 		3FFC31EF7E3096342292CD90D2331097 /* JotTextView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JotTextView.m; path = jot/JotTextView.m; sourceTree = "<group>"; };
-		4101B2BF7AE683640A71DC60272CBB66 /* Pods_graffitiTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_graffitiTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4103CF86F5A48398383570BE67E400BA /* JotDrawView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JotDrawView.m; path = jot/JotDrawView.m; sourceTree = "<group>"; };
 		42BBD6A9FDDE9FF90B8CFF250B7D28F1 /* jot.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = jot.modulemap; sourceTree = "<group>"; };
 		4714FB784DEA534F5E8519D829F12254 /* View+MASShorthandAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "View+MASShorthandAdditions.h"; path = "Masonry/View+MASShorthandAdditions.h"; sourceTree = "<group>"; };
 		4B83D73B2D74D9D9AA9D73395299C81E /* MASUtilities.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASUtilities.h; path = Masonry/MASUtilities.h; sourceTree = "<group>"; };
-		50D6EDC70210DA0E57793B1EE33E9041 /* Pods-graffiti.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-graffiti.debug.xcconfig"; sourceTree = "<group>"; };
 		5174720C09CB290EAAC1F2250EE05D48 /* NSArray+MASShorthandAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSArray+MASShorthandAdditions.h"; path = "Masonry/NSArray+MASShorthandAdditions.h"; sourceTree = "<group>"; };
 		5501892438C39B33C9AB40E66EE73C89 /* NSLayoutConstraint+MASDebugAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSLayoutConstraint+MASDebugAdditions.m"; path = "Masonry/NSLayoutConstraint+MASDebugAdditions.m"; sourceTree = "<group>"; };
-		557EAE133EB36AD40A9ADA09E988E60F /* Pods-graffitiTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-graffitiTests.debug.xcconfig"; sourceTree = "<group>"; };
+		5B02820107A50EB186A30395A29B9864 /* Masonry.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Masonry.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C4EC17009C2E5337B887CA7FD7B5162 /* ViewController+MASAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "ViewController+MASAdditions.h"; path = "Masonry/ViewController+MASAdditions.h"; sourceTree = "<group>"; };
 		5D18823C024AED1F2C64F6757FBB3D16 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		677F3073F36C9588034A8128B4BD9861 /* Pods-graffiti-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-graffiti-dummy.m"; sourceTree = "<group>"; };
 		6BF35C23E029BF10AE1D3595169AFBCF /* Masonry.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Masonry.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6C1113627911F6DF470A4DA8F36ADE75 /* Pods-graffiti.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-graffiti.modulemap"; sourceTree = "<group>"; };
-		6C484929CE28688AC5AB387E87985EC1 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		702A7EBBF184AFBBA82C0C83BCAFF91D /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		71013DFED9E54E332B2F2C3A605F05DA /* MASConstraintMaker.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASConstraintMaker.m; path = Masonry/MASConstraintMaker.m; sourceTree = "<group>"; };
 		71F9E407C13F4AD9F6A0584A6DE82DD9 /* JotTouchPoint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JotTouchPoint.h; path = jot/JotTouchPoint.h; sourceTree = "<group>"; };
 		777745AFD13CB44FF42A733EA1E2A033 /* MASViewAttribute.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASViewAttribute.h; path = Masonry/MASViewAttribute.h; sourceTree = "<group>"; };
+		7A2F6716AAC8F38A593A4F60393498DF /* Pods-graffiti-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-graffiti-acknowledgements.plist"; sourceTree = "<group>"; };
 		7C42A7E7423EBC63BA67A969B1874E27 /* Masonry.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = Masonry.modulemap; sourceTree = "<group>"; };
 		7D6CC3BBA132E6BBD591A4E0F08ED897 /* jot-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "jot-prefix.pch"; sourceTree = "<group>"; };
-		845B214E93AA8E98B1482B3A03702561 /* Pods-graffitiTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-graffitiTests.modulemap"; sourceTree = "<group>"; };
+		80E31CB5E25451891AFFC88589B81700 /* Pods-graffiti-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-graffiti-frameworks.sh"; sourceTree = "<group>"; };
 		863890C26E00B718C0517F79E9D47B19 /* JotDrawingContainer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JotDrawingContainer.h; path = jot/JotDrawingContainer.h; sourceTree = "<group>"; };
 		8AD3190D65FE0AB3B19D088B69033808 /* MASCompositeConstraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASCompositeConstraint.h; path = Masonry/MASCompositeConstraint.h; sourceTree = "<group>"; };
 		8C02236F91211034746A3AE4CE25F998 /* MASConstraint+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MASConstraint+Private.h"; path = "Masonry/MASConstraint+Private.h"; sourceTree = "<group>"; };
-		9036DC7F60F8ACDF8AEFE0DD34A502BF /* Pods-graffiti-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-graffiti-acknowledgements.plist"; sourceTree = "<group>"; };
 		92FC829D2DF256AF3B83924C84EF057F /* MASLayoutConstraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASLayoutConstraint.h; path = Masonry/MASLayoutConstraint.h; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		93B05C6F324F183C370CED4CCAD9CB04 /* UIImage+Jot.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+Jot.h"; path = "jot/UIImage+Jot.h"; sourceTree = "<group>"; };
 		93BDC307BB3247134E31ADD1BB9FA65B /* MASConstraintMaker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASConstraintMaker.h; path = Masonry/MASConstraintMaker.h; sourceTree = "<group>"; };
-		93C50B8C78BE7980E8344444FD3DED7A /* Pods-graffitiUITests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-graffitiUITests-frameworks.sh"; sourceTree = "<group>"; };
 		99799E767C1196E5DEDEF73980AE89BB /* Masonry-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Masonry-dummy.m"; sourceTree = "<group>"; };
-		9B8E586088A8ABE12F7CF2EB3707317C /* Pods-graffitiUITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-graffitiUITests-dummy.m"; sourceTree = "<group>"; };
 		9D223DDC77C9CADADA334D18FF15615F /* JotTextEditView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JotTextEditView.h; path = jot/JotTextEditView.h; sourceTree = "<group>"; };
 		A13E79A0F3DD50D66A9092AEE705BE9F /* NSArray+MASAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSArray+MASAdditions.m"; path = "Masonry/NSArray+MASAdditions.m"; sourceTree = "<group>"; };
-		A59BD89D789E3DCD5EE1C1BA778E0828 /* Pods-graffitiUITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-graffitiUITests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		B36D4246E62FE7C17538FF0AF3A79DAA /* Pods-graffitiTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-graffitiTests-umbrella.h"; sourceTree = "<group>"; };
-		B60DA3C9A9758F904D5D610F013E66B6 /* Pods-graffiti-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-graffiti-umbrella.h"; sourceTree = "<group>"; };
 		BBC8628B4A45E13590B95FBF92CE1D80 /* jot-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "jot-dummy.m"; sourceTree = "<group>"; };
 		C0010F2B53B4E3A43B687FAACF64D310 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C0C3DF5B4CB0EB524F09F978E68877A2 /* View+MASAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "View+MASAdditions.h"; path = "Masonry/View+MASAdditions.h"; sourceTree = "<group>"; };
-		C15C857F5ECD6C6CC1A515D7943EAC72 /* Pods_graffitiUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_graffitiUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C68AE7F89199B9C1E6D55399B81B96AF /* MASConstraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASConstraint.h; path = Masonry/MASConstraint.h; sourceTree = "<group>"; };
 		C7B25BB48384F6DF1FABC7BF331DFAA8 /* jot.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = jot.xcconfig; sourceTree = "<group>"; };
-		CE530C6CD08C4A5F77C55BFB43B07E55 /* Pods-graffitiTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-graffitiTests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		CAB515A7B52D18483B345C6D7F6B2F81 /* Pods-graffiti.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-graffiti.modulemap"; sourceTree = "<group>"; };
+		CB23BC324ED9208D31DEE6FCF9012CCA /* jot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = jot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE4142EDBC7D7D037BA7B39552442558 /* Pods-graffiti-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-graffiti-umbrella.h"; sourceTree = "<group>"; };
 		D170A5772F0E5A4CA1D6FF26009988AA /* Masonry-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Masonry-umbrella.h"; sourceTree = "<group>"; };
 		D217AD401B087E4B79C29440D725288B /* UIImage+Jot.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Jot.m"; path = "jot/UIImage+Jot.m"; sourceTree = "<group>"; };
-		D31B03FFB87AF6CC9A346D96B5F86DA7 /* Pods-graffitiUITests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-graffitiUITests-resources.sh"; sourceTree = "<group>"; };
 		D8011F14C2013C76FFC7BFCC22BC58B1 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D8C84DC872955B6320C6E22F1A01A290 /* Pods-graffiti-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-graffiti-dummy.m"; sourceTree = "<group>"; };
 		D93BEDA713AE5B65F801CB5553090074 /* JotTouchBezier.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JotTouchBezier.h; path = jot/JotTouchBezier.h; sourceTree = "<group>"; };
 		D95DD7AD298972270F8F2DE000CF65F2 /* JotDrawView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JotDrawView.h; path = jot/JotDrawView.h; sourceTree = "<group>"; };
 		DA02EF6077A91B6DED6E2B2BFB1FEAF4 /* jot.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = jot.h; path = jot/jot.h; sourceTree = "<group>"; };
-		DA1BF4D22ADBE1799118D09259F59559 /* Pods-graffitiTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-graffitiTests-resources.sh"; sourceTree = "<group>"; };
-		DBB8BA987731B39F5AA8BE8C7089BA5C /* Pods-graffitiTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-graffitiTests-acknowledgements.plist"; sourceTree = "<group>"; };
-		DE70708C36042E4B290759BBD0C996D1 /* Pods-graffitiUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-graffitiUITests.release.xcconfig"; sourceTree = "<group>"; };
 		DFA4CE1EE1D17974C770FBB7D800CD7C /* JotTextView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JotTextView.h; path = jot/JotTextView.h; sourceTree = "<group>"; };
 		E04ECF9969720C861C73E0B8EBB12C1A /* JotTextEditView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JotTextEditView.m; path = jot/JotTextEditView.m; sourceTree = "<group>"; };
 		E181D2134BB1C45273F8F465AEBEC1ED /* JotDrawingContainer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JotDrawingContainer.m; path = jot/JotDrawingContainer.m; sourceTree = "<group>"; };
 		E3987FDFC33F6395F1A1B4F554489871 /* jot-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "jot-umbrella.h"; sourceTree = "<group>"; };
 		E496A66B919B336032FE819283BF83B8 /* MASViewConstraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASViewConstraint.h; path = Masonry/MASViewConstraint.h; sourceTree = "<group>"; };
-		E5051A39E18295C0BFB12D25ADDB38CF /* Pods-graffitiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-graffitiTests.release.xcconfig"; sourceTree = "<group>"; };
-		E6207EDD395E0359CFEDDC3031F30BD8 /* Pods-graffitiTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-graffitiTests-dummy.m"; sourceTree = "<group>"; };
+		E57CCB0808018EB035565CE4E991D14B /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EE5ABD0D909177780F8742EDE18E2732 /* NSLayoutConstraint+MASDebugAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSLayoutConstraint+MASDebugAdditions.h"; path = "Masonry/NSLayoutConstraint+MASDebugAdditions.h"; sourceTree = "<group>"; };
 		EF68AE6E9855B2941C99987567ADC6DD /* Masonry-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Masonry-prefix.pch"; sourceTree = "<group>"; };
 		EFE45DB28764D6A3BCBE53CA3B9E3848 /* ViewController+MASAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "ViewController+MASAdditions.m"; path = "Masonry/ViewController+MASAdditions.m"; sourceTree = "<group>"; };
-		F297C71B8B0E2603035244B496A16EB7 /* Pods-graffitiUITests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-graffitiUITests.modulemap"; sourceTree = "<group>"; };
 		F77ECE1001940B423B3B63D0E792D34A /* Masonry.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Masonry.h; path = Masonry/Masonry.h; sourceTree = "<group>"; };
-		F9A0A413C0B01A55D69F39F40D0C5210 /* Pods-graffiti.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-graffiti.release.xcconfig"; sourceTree = "<group>"; };
 		FA235B5F9030EB5836AB837CDF01AD26 /* MASCompositeConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASCompositeConstraint.m; path = Masonry/MASCompositeConstraint.m; sourceTree = "<group>"; };
-		FFCD913538D925AF1D06E45DF60D7E1D /* Pods-graffiti-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-graffiti-acknowledgements.markdown"; sourceTree = "<group>"; };
+		FB00B4F9542BC4CE3C324C8F6451F968 /* Pods-graffiti.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-graffiti.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,41 +189,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		63E3E07B64B0B6C4CC6C6C33020433E5 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8DCCD47890192ED9934188519230401E /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7C927D283B0CE8A1B4DE564F71625EA4 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E350D5492453C760C75B18652E388C95 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1C85B959E269070E44A4E769B5C91896 /* Pods-graffitiTests */ = {
+		211972B8804BB1432F8C9BB22DB28233 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				702A7EBBF184AFBBA82C0C83BCAFF91D /* Info.plist */,
-				845B214E93AA8E98B1482B3A03702561 /* Pods-graffitiTests.modulemap */,
-				CE530C6CD08C4A5F77C55BFB43B07E55 /* Pods-graffitiTests-acknowledgements.markdown */,
-				DBB8BA987731B39F5AA8BE8C7089BA5C /* Pods-graffitiTests-acknowledgements.plist */,
-				E6207EDD395E0359CFEDDC3031F30BD8 /* Pods-graffitiTests-dummy.m */,
-				1C56E15E94A49CA64877F6D5DC29E579 /* Pods-graffitiTests-frameworks.sh */,
-				DA1BF4D22ADBE1799118D09259F59559 /* Pods-graffitiTests-resources.sh */,
-				B36D4246E62FE7C17538FF0AF3A79DAA /* Pods-graffitiTests-umbrella.h */,
-				557EAE133EB36AD40A9ADA09E988E60F /* Pods-graffitiTests.debug.xcconfig */,
-				E5051A39E18295C0BFB12D25ADDB38CF /* Pods-graffitiTests.release.xcconfig */,
+				CB23BC324ED9208D31DEE6FCF9012CCA /* jot.framework */,
+				5B02820107A50EB186A30395A29B9864 /* Masonry.framework */,
+				29917CCA383FAA87E0D9C2987D743130 /* Pods_graffiti.framework */,
 			);
-			name = "Pods-graffitiTests";
-			path = "Target Support Files/Pods-graffitiTests";
+			name = Products;
 			sourceTree = "<group>";
 		};
 		36ED9B5EFEDFAB209DFE56C075E92304 /* Pods */ = {
@@ -270,24 +218,6 @@
 				DD823825D4B08E2AE7068B31500D9229 /* iOS */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		639BDD05A8A4B347A840F49AF1CAFCAC /* Pods-graffitiUITests */ = {
-			isa = PBXGroup;
-			children = (
-				6C484929CE28688AC5AB387E87985EC1 /* Info.plist */,
-				F297C71B8B0E2603035244B496A16EB7 /* Pods-graffitiUITests.modulemap */,
-				A59BD89D789E3DCD5EE1C1BA778E0828 /* Pods-graffitiUITests-acknowledgements.markdown */,
-				33A4A542E5CB0E0C86A224EBBAE4C039 /* Pods-graffitiUITests-acknowledgements.plist */,
-				9B8E586088A8ABE12F7CF2EB3707317C /* Pods-graffitiUITests-dummy.m */,
-				93C50B8C78BE7980E8344444FD3DED7A /* Pods-graffitiUITests-frameworks.sh */,
-				D31B03FFB87AF6CC9A346D96B5F86DA7 /* Pods-graffitiUITests-resources.sh */,
-				3141546D5914707A650702FD1E5DDF10 /* Pods-graffitiUITests-umbrella.h */,
-				2144B9253E301D082C6F0CDFFD8DB425 /* Pods-graffitiUITests.debug.xcconfig */,
-				DE70708C36042E4B290759BBD0C996D1 /* Pods-graffitiUITests.release.xcconfig */,
-			);
-			name = "Pods-graffitiUITests";
-			path = "Target Support Files/Pods-graffitiUITests";
 			sourceTree = "<group>";
 		};
 		706A716AB61D647F7FAC7DD5B71B647F /* jot */ = {
@@ -354,21 +284,27 @@
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
 				59511511C2B4BC905C933DCC67E365C4 /* Frameworks */,
 				36ED9B5EFEDFAB209DFE56C075E92304 /* Pods */,
-				801FD865190F0396ADF14E37B263B76D /* Products */,
-				ACD947CBB052B50086C9EED9E43243F1 /* Targets Support Files */,
+				211972B8804BB1432F8C9BB22DB28233 /* Products */,
+				A75F8C61F17FA2CA4A62B6B71A5D3981 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		801FD865190F0396ADF14E37B263B76D /* Products */ = {
+		887ACB4BE4D2E532580A8C1FF1611037 /* Pods-graffiti */ = {
 			isa = PBXGroup;
 			children = (
-				2B409074F4740CEEF3AC995B424DB109 /* jot.framework */,
-				2F3595EF523ACB662366190BC6AAB59C /* Masonry.framework */,
-				36A7821382021CD5884C83F0E4E4D628 /* Pods_graffiti.framework */,
-				4101B2BF7AE683640A71DC60272CBB66 /* Pods_graffitiTests.framework */,
-				C15C857F5ECD6C6CC1A515D7943EAC72 /* Pods_graffitiUITests.framework */,
+				E57CCB0808018EB035565CE4E991D14B /* Info.plist */,
+				CAB515A7B52D18483B345C6D7F6B2F81 /* Pods-graffiti.modulemap */,
+				0A93E65DB46BDA3BD387C67B0C9CBB8C /* Pods-graffiti-acknowledgements.markdown */,
+				7A2F6716AAC8F38A593A4F60393498DF /* Pods-graffiti-acknowledgements.plist */,
+				D8C84DC872955B6320C6E22F1A01A290 /* Pods-graffiti-dummy.m */,
+				80E31CB5E25451891AFFC88589B81700 /* Pods-graffiti-frameworks.sh */,
+				1E1C526243BA2C99FF086F535D0C2197 /* Pods-graffiti-resources.sh */,
+				CE4142EDBC7D7D037BA7B39552442558 /* Pods-graffiti-umbrella.h */,
+				1BBB452F19787D3F3C4955303CE5245D /* Pods-graffiti.debug.xcconfig */,
+				FB00B4F9542BC4CE3C324C8F6451F968 /* Pods-graffiti.release.xcconfig */,
 			);
-			name = Products;
+			name = "Pods-graffiti";
+			path = "Target Support Files/Pods-graffiti";
 			sourceTree = "<group>";
 		};
 		A55178481300CABF23C8BBB0AFCFB76C /* Support Files */ = {
@@ -385,32 +321,12 @@
 			path = "../Target Support Files/jot";
 			sourceTree = "<group>";
 		};
-		ACD947CBB052B50086C9EED9E43243F1 /* Targets Support Files */ = {
+		A75F8C61F17FA2CA4A62B6B71A5D3981 /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				BE915B6B1F88D59887B34F5AEAFEBFF2 /* Pods-graffiti */,
-				1C85B959E269070E44A4E769B5C91896 /* Pods-graffitiTests */,
-				639BDD05A8A4B347A840F49AF1CAFCAC /* Pods-graffitiUITests */,
+				887ACB4BE4D2E532580A8C1FF1611037 /* Pods-graffiti */,
 			);
 			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		BE915B6B1F88D59887B34F5AEAFEBFF2 /* Pods-graffiti */ = {
-			isa = PBXGroup;
-			children = (
-				294A305C9E3225B805566B24EBB336FC /* Info.plist */,
-				6C1113627911F6DF470A4DA8F36ADE75 /* Pods-graffiti.modulemap */,
-				FFCD913538D925AF1D06E45DF60D7E1D /* Pods-graffiti-acknowledgements.markdown */,
-				9036DC7F60F8ACDF8AEFE0DD34A502BF /* Pods-graffiti-acknowledgements.plist */,
-				677F3073F36C9588034A8128B4BD9861 /* Pods-graffiti-dummy.m */,
-				05CCBEC237846ADEC3A64EDE7DCB57DE /* Pods-graffiti-frameworks.sh */,
-				25ED70DAEA6CF76C022A159563B7665B /* Pods-graffiti-resources.sh */,
-				B60DA3C9A9758F904D5D610F013E66B6 /* Pods-graffiti-umbrella.h */,
-				50D6EDC70210DA0E57793B1EE33E9041 /* Pods-graffiti.debug.xcconfig */,
-				F9A0A413C0B01A55D69F39F40D0C5210 /* Pods-graffiti.release.xcconfig */,
-			);
-			name = "Pods-graffiti";
-			path = "Target Support Files/Pods-graffiti";
 			sourceTree = "<group>";
 		};
 		DD823825D4B08E2AE7068B31500D9229 /* iOS */ = {
@@ -487,42 +403,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		638778364ED5CB16AEC298856A77A7C2 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				894038C1675624DF8DADFA08E6308E3E /* Pods-graffitiUITests-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E490AEAE54D8B57662D2D8F02C4E7A8C /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				67F9447D0268E8A45529C32AF0DCFC1A /* Pods-graffitiTests-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		31B887C1B67AB995D1951DA834FC3033 /* Pods-graffitiTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A4D846DB03B9559EDB61DECCDEEAA82F /* Build configuration list for PBXNativeTarget "Pods-graffitiTests" */;
-			buildPhases = (
-				7A4131381591E0476D77B7228320DB85 /* Sources */,
-				7C927D283B0CE8A1B4DE564F71625EA4 /* Frameworks */,
-				E490AEAE54D8B57662D2D8F02C4E7A8C /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Pods-graffitiTests";
-			productName = "Pods-graffitiTests";
-			productReference = 4101B2BF7AE683640A71DC60272CBB66 /* Pods_graffitiTests.framework */;
-			productType = "com.apple.product-type.framework";
-		};
 		6853F19CD52AE3264914F2A6E11751D6 /* Pods-graffiti */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 501C7FEB7CFC8E91B17D77AA77E73EA8 /* Build configuration list for PBXNativeTarget "Pods-graffiti" */;
@@ -539,7 +422,7 @@
 			);
 			name = "Pods-graffiti";
 			productName = "Pods-graffiti";
-			productReference = 36A7821382021CD5884C83F0E4E4D628 /* Pods_graffiti.framework */;
+			productReference = 29917CCA383FAA87E0D9C2987D743130 /* Pods_graffiti.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		6B8DEA66DA7ECC4B5F9CF16D46167E73 /* Masonry */ = {
@@ -556,7 +439,7 @@
 			);
 			name = Masonry;
 			productName = Masonry;
-			productReference = 2F3595EF523ACB662366190BC6AAB59C /* Masonry.framework */;
+			productReference = 5B02820107A50EB186A30395A29B9864 /* Masonry.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		6CEE9BE92C68717AE41AEA9AC99517B7 /* jot */ = {
@@ -574,24 +457,7 @@
 			);
 			name = jot;
 			productName = jot;
-			productReference = 2B409074F4740CEEF3AC995B424DB109 /* jot.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		976D62F45FC7F26DD1330D661D88938D /* Pods-graffitiUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = C3DC7E8EAA8215CEA33E6A09EE4CAC53 /* Build configuration list for PBXNativeTarget "Pods-graffitiUITests" */;
-			buildPhases = (
-				77C37740617C21557E3D3EA2FAE16F6A /* Sources */,
-				63E3E07B64B0B6C4CC6C6C33020433E5 /* Frameworks */,
-				638778364ED5CB16AEC298856A77A7C2 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Pods-graffitiUITests";
-			productName = "Pods-graffitiUITests";
-			productReference = C15C857F5ECD6C6CC1A515D7943EAC72 /* Pods_graffitiUITests.framework */;
+			productReference = CB23BC324ED9208D31DEE6FCF9012CCA /* jot.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -611,15 +477,13 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = 801FD865190F0396ADF14E37B263B76D /* Products */;
+			productRefGroup = 211972B8804BB1432F8C9BB22DB28233 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				6CEE9BE92C68717AE41AEA9AC99517B7 /* jot */,
 				6B8DEA66DA7ECC4B5F9CF16D46167E73 /* Masonry */,
 				6853F19CD52AE3264914F2A6E11751D6 /* Pods-graffiti */,
-				31B887C1B67AB995D1951DA834FC3033 /* Pods-graffitiTests */,
-				976D62F45FC7F26DD1330D661D88938D /* Pods-graffitiUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -640,22 +504,6 @@
 				E717AB05650879016F5856C9311F23D3 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				BB52B78800AF72686A59E391283C056D /* View+MASAdditions.m in Sources */,
 				5B7447C38AA7F582820D4AFE0C058D6C /* ViewController+MASAdditions.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		77C37740617C21557E3D3EA2FAE16F6A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6F9126F8F93DF55A103958E4DBD21CE2 /* Pods-graffitiUITests-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7A4131381591E0476D77B7228320DB85 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D7F55F1B19E2607D71ED443FC43EED08 /* Pods-graffitiTests-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -736,39 +584,6 @@
 			};
 			name = Debug;
 		};
-		309171BDAC212C52E2A2D1AFF6DA908C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2144B9253E301D082C6F0CDFFD8DB425 /* Pods-graffitiUITests.debug.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-graffitiUITests/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-graffitiUITests/Pods-graffitiUITests.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_graffitiUITests;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		34E9E4AF2BBC4CE8C676AD5E1A332227 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C7B25BB48384F6DF1FABC7BF331DFAA8 /* jot.xcconfig */;
@@ -833,39 +648,6 @@
 				STRIP_INSTALLED_PRODUCT = NO;
 				SYMROOT = "${SRCROOT}/../build";
 				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		440E7B9E03802314C415AD0614C4D557 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = DE70708C36042E4B290759BBD0C996D1 /* Pods-graffitiUITests.release.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-graffitiUITests/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-graffitiUITests/Pods-graffitiUITests.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_graffitiUITests;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -942,7 +724,7 @@
 		};
 		5EE1EA6DCF950ECBAF114256B24A63E5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F9A0A413C0B01A55D69F39F40D0C5210 /* Pods-graffiti.release.xcconfig */;
+			baseConfigurationReference = FB00B4F9542BC4CE3C324C8F6451F968 /* Pods-graffiti.release.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
@@ -965,72 +747,6 @@
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = Pods_graffiti;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		C7DE09D010AFAC7A3D256AF59ACD3B94 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 557EAE133EB36AD40A9ADA09E988E60F /* Pods-graffitiTests.debug.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-graffitiTests/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-graffitiTests/Pods-graffitiTests.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_graffitiTests;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		D570F0531557ED7E3892F7F15EE0D5E4 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = E5051A39E18295C0BFB12D25ADDB38CF /* Pods-graffitiTests.release.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-graffitiTests/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-graffitiTests/Pods-graffitiTests.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_graffitiTests;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1070,7 +786,7 @@
 		};
 		FA688F73FFFD735255E14140FAABF0A2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 50D6EDC70210DA0E57793B1EE33E9041 /* Pods-graffiti.debug.xcconfig */;
+			baseConfigurationReference = 1BBB452F19787D3F3C4955303CE5245D /* Pods-graffiti.debug.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
@@ -1136,24 +852,6 @@
 			buildConfigurations = (
 				FA688F73FFFD735255E14140FAABF0A2 /* Debug */,
 				5EE1EA6DCF950ECBAF114256B24A63E5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		A4D846DB03B9559EDB61DECCDEEAA82F /* Build configuration list for PBXNativeTarget "Pods-graffitiTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C7DE09D010AFAC7A3D256AF59ACD3B94 /* Debug */,
-				D570F0531557ED7E3892F7F15EE0D5E4 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		C3DC7E8EAA8215CEA33E6A09EE4CAC53 /* Build configuration list for PBXNativeTarget "Pods-graffitiUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				309171BDAC212C52E2A2D1AFF6DA908C /* Debug */,
-				440E7B9E03802314C415AD0614C4D557 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

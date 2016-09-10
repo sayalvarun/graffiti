@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8BFED78D1D8395D900253DE8"
+               BlueprintIdentifier = "4A36C0071D83A477004B6D2E"
                BuildableName = "graffiti.app"
                BlueprintName = "graffiti"
                ReferencedContainer = "container:graffiti.xcodeproj">
@@ -28,31 +28,11 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8BFED7A11D8395DA00253DE8"
-               BuildableName = "graffitiTests.xctest"
-               BlueprintName = "graffitiTests"
-               ReferencedContainer = "container:graffiti.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8BFED7AC1D8395DA00253DE8"
-               BuildableName = "graffitiUITests.xctest"
-               BlueprintName = "graffitiUITests"
-               ReferencedContainer = "container:graffiti.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8BFED78D1D8395D900253DE8"
+            BlueprintIdentifier = "4A36C0071D83A477004B6D2E"
             BuildableName = "graffiti.app"
             BlueprintName = "graffiti"
             ReferencedContainer = "container:graffiti.xcodeproj">
@@ -75,7 +55,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8BFED78D1D8395D900253DE8"
+            BlueprintIdentifier = "4A36C0071D83A477004B6D2E"
             BuildableName = "graffiti.app"
             BlueprintName = "graffiti"
             ReferencedContainer = "container:graffiti.xcodeproj">
@@ -94,7 +74,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8BFED78D1D8395D900253DE8"
+            BlueprintIdentifier = "4A36C0071D83A477004B6D2E"
             BuildableName = "graffiti.app"
             BlueprintName = "graffiti"
             ReferencedContainer = "container:graffiti.xcodeproj">
