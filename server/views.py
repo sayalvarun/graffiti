@@ -35,7 +35,7 @@ def logTag():
         img = binascii.a2b_hex(data)
         with open('image.png', 'wb') as image_file:
             image_file.write(img)
-    except(Exception, e):
+    except Exception, e:
         print("ERROR: " + str(e))
         return "1" #error
 
