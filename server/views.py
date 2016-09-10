@@ -20,9 +20,10 @@ def sendImage():
         with open("server/file.jpg", "rb") as imageFile:
             f = imageFile.read()
             b = bytearray(f)
-            num = str(convert(343251))
-            print("343251 is " + num)
-            return (num + str(b))
+            num = 343251 # \x00\x05\x3C\xD3
+            #print("343251 is " + num)
+            return jsonify(id=num, payload=b)
+            #return (num + str(b))
     else:
         print("ERROR: file not found")
 
