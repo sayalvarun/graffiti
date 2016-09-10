@@ -11,5 +11,5 @@ def sendImage():
     return flask.send_file('file.jpg')
 
 @app.route('/tag')
-def sendImage():
+def logTag():
     return "Hello, World!"
