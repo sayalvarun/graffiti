@@ -23,31 +23,31 @@
             <point key="canvasLocation" x="130" y="328"/>
         </scene>
         <!--Draw View Controller-->
-        <scene sceneID="FZn-7e-5Co">
+        <scene sceneID="28O-3P-JLr">
             <objects>
-                <viewController storyboardIdentifier="DrawView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Pa2-kI-NnN" customClass="DrawViewController" customModule="graffiti" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DrawViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tn5-Gl-KlH" customClass="DrawViewController" customModule="graffiti" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="eAF-Q8-OUX"/>
-                        <viewControllerLayoutGuide type="bottom" id="c2k-JP-WsI"/>
+                        <viewControllerLayoutGuide type="top" id="MaQ-cL-rQr"/>
+                        <viewControllerLayoutGuide type="bottom" id="nVB-ev-vgm"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="iCQ-hr-gFA">
+                    <view key="view" contentMode="scaleToFill" id="3g0-ib-7S1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SuY-Z4-Cy1">
-                                <rect key="frame" x="122" y="493" width="30" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tSS-g7-47C">
+                                <rect key="frame" x="145" y="518" width="30" height="30"/>
                                 <state key="normal" title="Test"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="test" destination="SuY-Z4-Cy1" id="Twl-NI-yWc"/>
+                        <outlet property="saveButton" destination="tSS-g7-47C" id="tFL-E6-YPc"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3R5-ws-cWQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Flm-4c-xDg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="519" y="328"/>
+            <point key="canvasLocation" x="502" y="328"/>
         </scene>
     </scenes>
 </document>
