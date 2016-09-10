@@ -10,12 +10,15 @@ import UIKit
 import Masonry
 import jot
 import SnapKit
+import ColorSlider
 
 class DrawViewController: JotViewController {
 
     var requestManager: RequestManager?
     var updatePictureBlock:(image: UIImage)->Void = { arg in }
     var imageView : UIImageView?
+    var colorSlider: ColorSlider! = ColorSlider()
+    var colorButton: UIButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,10 +48,45 @@ class DrawViewController: JotViewController {
         
         undoButton.snp_makeConstraints { (make) -> Void in
             make.top.equalTo(self.view).offset(20)
+            make.right.equalTo(self.view).offset(-120)
+        }
+        
+        //set up stroke button
+        let strokeButton = UIButton()
+        strokeButton.setTitle("Stroke", forState: .Normal)
+        strokeButton.addTarget(self, action: #selector(onStrokeChange), forControlEvents: .TouchUpInside)
+        self.view.addSubview(strokeButton)
+        
+        strokeButton.snp_makeConstraints { (make) -> Void in
+            make.top.equalTo(self.view).offset(20)
+            make.right.equalTo(self.view).offset(-60)
+        }
+        
+        //set up color buttons
+        colorButton.setTitle("Color", forState: .Normal)
+        colorButton.addTarget(self, action: #selector(onColor), forControlEvents: .TouchUpInside)
+        self.view.addSubview(colorButton)
+        
+        colorButton.snp_makeConstraints { (make) -> Void in
+            make.top.equalTo(self.view).offset(20)
             make.right.equalTo(self.view).offset(-20)
         }
         
-        //set up save butoon
+        let colorSliderWidth = CGFloat(12)
+        let colorSliderHeight = CGFloat(150)
+        let colorSliderPadding = CGFloat(15)
+        
+        colorSlider.frame = CGRectMake(view.bounds.width - colorSliderWidth - colorSliderPadding - 5, 40 + colorSliderPadding, colorSliderWidth, colorSliderHeight)
+        colorSlider.hidden = true
+        colorSlider.addTarget(self, action: #selector(changedColor), forControlEvents: .ValueChanged)
+        colorSlider.addTarget(self, action: #selector(changedColor), forControlEvents: .TouchUpInside)
+
+        colorSlider.borderWidth = 2.0
+        colorSlider.borderColor = UIColor.whiteColor()
+        self.view.addSubview(colorSlider)
+        
+        
+        //set up save buttons
         let saveButton = UIButton()
         saveButton.setTitle("Save", forState: .Normal)
         saveButton.addTarget(self, action: #selector(onSave), forControlEvents: .TouchUpInside)
@@ -92,6 +130,23 @@ class DrawViewController: JotViewController {
     
     @IBAction func onUndo(sender: AnyObject) {
         self.undo()
+    }
+    
+    @IBAction func onStrokeChange(sender: AnyObject) {
+        self.drawingStrokeWidth = self.drawingStrokeWidth + 5.0
+        if(self.drawingStrokeWidth > 20.0) {
+            self.drawingStrokeWidth = 5.0
+        }
+    }
+    
+    @IBAction func onColor(sender: AnyObject) {
+        colorSlider.hidden = false
+    }
+
+    
+    func changedColor(slider: ColorSlider) {
+        self.drawingColor = slider.color
+        colorButton.backgroundColor = colorSlider.color
     }
 
     override func didReceiveMemoryWarning() {
