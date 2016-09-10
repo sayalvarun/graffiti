@@ -72,12 +72,6 @@ class DrawViewController: JotViewController {
             })
         }
         
-//        self.updatePictureBlock = {(image: UIImage) -> Void in
-//            dispatch_async(dispatch_get_main_queue(), {
-//                self.ImageView.image = image
-//            })
-//        }
-        
         requestManager!.getDoodle(self.updatePictureBlock)
     }
 
