@@ -15,6 +15,7 @@ class DrawViewController: JotViewController {
     var requestManager: RequestManager?
     var updatePictureBlock:(image: UIImage)->Void = { arg in }
     
+    @IBOutlet weak var test: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.

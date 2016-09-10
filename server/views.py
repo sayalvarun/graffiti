@@ -1,8 +1,10 @@
 import flask
 import io
 import os
+import re
 import binascii
 import datetime
+import cStringIO as StringIO
 from PIL import Image
 from server import server
 
@@ -18,7 +20,7 @@ def sendImage():
         with open("server/file.jpg", "rb") as imageFile:
             f = imageFile.read()
             b = bytearray(f)
-            return str(dump(343251)).replace('\'', '') + str(b) #jank af
+            return str(convert(343251)) + str(b) 
     else:
         print("ERROR: file not found")
 
@@ -30,32 +32,38 @@ def logTag():
     latitude = flask.request.args.get("lat")
     longitude = flask.request.args.get("long")
     
-    data = flask.request.get_data().replace(" ", "")
+    data = flask.request.get_data()
+    data = flask.request.data
+    print(data)
+    #print(data)
+    print("Received %s bytes" % len(data))
+    '''
+    data = data.replace(" ", "")
     data = data.replace("<", "")
     data = data.replace(">", "")
-    filename = "payload" + str(datetime.datetime.now()) + ".png"
+
+    filename = "payload" + str(datetime.datetime.now()) + ".txt"
     with open(filename, "wb") as file:
         file.write(data)
     
     print("(%s,%s)" % (latitude, longitude))
-    #print(data)
+    '''
     try:
+        #b_data = binascii.unhexlify(data)
+        stream = StringIO.StringIO(data)
+        img = Image.open(stream)
+        img.save("a_test.png")
+        '''
         img = binascii.a2b_hex(data.strip())
         with open('image.png', 'wb') as image_file:
             image_file.write(img)
+        '''
     except Exception, e:
         print("ERROR: " + str(e))
         return "1" #error
-
+    
+    print("DATA:" + data)    
     return "0" #ok
 
-def dump(n): 
-    s = '%x' % n
-    if len(s) & 1:
-        s = '0' + s
-
-    decoded = s.decode('hex')
-    while len(decoded) != 4:
-        decoded = ('\x00' + decoded)
-
-    return repr(decoded)
+def convert(num):
+    return re.sub(r'([0-9A-F]{2})',r'\\x\1','%08X' % num)
