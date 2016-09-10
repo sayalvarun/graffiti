@@ -60,22 +60,31 @@ class RequestManager: NSObject,CLLocationManagerDelegate {
                 return
             }
             // make sure we got data
-            guard var responseData = data else {
+            guard let responseData = data else {
                 print("Error: did not receive data")
                 return
             }
-            
-            let subBytes = responseData.subdataWithRange(NSMakeRange(0, sizeof(UInt32)))
-            print(subBytes)
-            
-            var doodleID : Int32 = 0;
-            memcpy(&doodleID, responseData.bytes, sizeof(Int32))
 
-            responseData = NSData(bytes: responseData.bytes+sizeof(Int32), length: responseData.length-sizeof(Int32))
-            
-            if let image = UIImage(data: responseData, scale: 1.0)
-            {
-                action(image: image)
+            do{
+                let json = try NSJSONSerialization.JSONObjectWithData(responseData, options: .AllowFragments)
+                let doodleID = json["id"]
+                guard let decodedData = NSData(base64EncodedString: String(json["payload"]), options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters) else{
+                        print("Error: Decoding from base64")
+                        return
+                    }
+                
+                let headeroffset = 6 // constant 6 bytes are prepended to payload
+                let realDecodedData = NSData(bytes: decodedData.bytes+headeroffset, length:decodedData.length-headeroffset)
+                
+                if let image = UIImage(data: realDecodedData, scale: 1.0)
+                {
+                    action(image: image)
+                }else{
+                    print("Could not make image")
+                }
+                
+            }catch{
+                print("Error making to json: \(error)")
             }
             
         }
