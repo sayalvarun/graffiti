@@ -33,16 +33,20 @@ def logTag():
     longitude = flask.request.args.get("long")
     
     data = flask.request.get_data()
+    print(flask.request.data)
+    #print(data)
     print("Received %s bytes" % len(data))
+    '''
     data = data.replace(" ", "")
     data = data.replace("<", "")
     data = data.replace(">", "")
+
     filename = "payload" + str(datetime.datetime.now()) + ".txt"
     with open(filename, "wb") as file:
         file.write(data)
     
     print("(%s,%s)" % (latitude, longitude))
-    
+    '''
     try:
         b_data = binascii.unhexlify(data)
         stream = StringIO.StringIO(b_data)
