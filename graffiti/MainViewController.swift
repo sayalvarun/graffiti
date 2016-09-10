@@ -14,6 +14,7 @@ import AVFoundation
 
 class MainViewController: UIViewController, JotViewControllerDelegate {
     
+    //camera stream variables
     let captureSession = AVCaptureSession()
     var previewLayer : AVCaptureVideoPreviewLayer?
     var captureDevice : AVCaptureDevice?
@@ -42,6 +43,7 @@ class MainViewController: UIViewController, JotViewControllerDelegate {
             }
         }
         
+        //add drawing view
         self.addChildViewController(drawViewController)
         self.view.addSubview(drawViewController.view)
         drawViewController.didMoveToParentViewController(self)
