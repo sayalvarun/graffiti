@@ -19,18 +19,44 @@ class DrawViewController: JotViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        let button = UIButton()
-        button.setTitle("Save", forState: .Normal)
-        button.addTarget(self, action: #selector(onSave), forControlEvents: .TouchUpInside)
-        self.view.addSubview(button)
-
-        button.snp_makeConstraints { (make) -> Void in
-            make.bottom.equalTo(self.view).offset(-20)
+        
+        
+        //set up close button
+        let closeButton = UIButton()
+        closeButton.setTitle("Close", forState: .Normal)
+        closeButton.addTarget(self, action: #selector(onClose), forControlEvents: .TouchUpInside)
+        self.view.addSubview(closeButton)
+        
+        closeButton.snp_makeConstraints { (make) -> Void in
+            make.top.equalTo(self.view).offset(20)
+            make.left.equalTo(self.view).offset(20)
+        }
+        
+        //set up undo button
+        let undoButton = UIButton()
+        undoButton.setTitle("Undo", forState: .Normal)
+        undoButton.addTarget(self, action: #selector(onUndo), forControlEvents: .TouchUpInside)
+        self.view.addSubview(undoButton)
+        
+        undoButton.snp_makeConstraints { (make) -> Void in
+            make.top.equalTo(self.view).offset(20)
             make.right.equalTo(self.view).offset(-20)
+        }
+        
+        //set up save butoon
+        let saveButton = UIButton()
+        saveButton.setTitle("Save", forState: .Normal)
+        saveButton.addTarget(self, action: #selector(onSave), forControlEvents: .TouchUpInside)
+        self.view.addSubview(saveButton)
+
+        saveButton.snp_makeConstraints { (make) -> Void in
+            make.bottom.equalTo(self.view).offset(-20)
+            make.centerX.equalTo(self.view)
             //make.bottom.equalTo()(self.view).with().offset()(-4.0)
         }
 
 
+        //set state of drawing view
         self.state = JotViewState.Drawing
         self.drawingColor = UIColor.redColor()
 
@@ -53,6 +79,13 @@ class DrawViewController: JotViewController {
         UIImageWriteToSavedPhotosAlbum(doodle, nil, nil, nil)
         self.clearAll()
 
+    }
+    
+    @IBAction func onClose(sender: AnyObject) {
+        self.clearAll()
+    }
+    
+    @IBAction func onUndo(sender: AnyObject) {
     }
 
     override func didReceiveMemoryWarning() {
