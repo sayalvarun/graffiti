@@ -17,7 +17,7 @@ class RequestManager: NSObject,CLLocationManagerDelegate {
     var config : NSURLSessionConfiguration?
     var session: NSURLSession?
     let locationManager = CLLocationManager()
-    let motionManager = CMDeviceMotion()
+    var motionManager = CMMotionManager()
     
     
     class var sharedInstance : RequestManager {
@@ -46,8 +46,33 @@ class RequestManager: NSObject,CLLocationManagerDelegate {
             self.locationManager.startUpdatingHeading()
         }
         
-        //let ref = CMAttitudeReferenceFrame.XArbitraryZVertical
-        //startDeviceMo
+//        self.motionManager = CMMotionManager()
+//        if self.motionManager.deviceMotionAvailable == true {
+//            
+//            self.motionManager.deviceMotionUpdateInterval = 0.1;
+//            
+////            let queue = NSOperationQueue()
+////            self.motionManager.startDeviceMotionUpdatesToQueue(queue, withHandler: { [weak self] (motion, error) -> Void in
+////                
+////                // Get the attitude of the device
+////                if let attitude = motion?.attitude {
+////                    // Get the pitch (in radians) and convert to degrees.
+////                    // Import Darwin to get M_PI in Swift
+////                    print(attitude.pitch * 180.0/M_PI)
+////                    
+////                    dispatch_async(dispatch_get_main_queue()) {
+////                        // Update some UI
+////                    }
+////                }
+////                
+////                })
+//
+//            self.motionManager.startDeviceMotionUpdates()
+//            print("Device motion started")
+//        }
+//        else {
+//            print("Device motion unavailable");
+//        }
     }
     
     func getPopulatedUrlComponents(path: String) -> NSURLComponents
@@ -67,18 +92,20 @@ class RequestManager: NSObject,CLLocationManagerDelegate {
         let lat = gpslocation.latitude
         let long = gpslocation.longitude
         let cardinality = self.locationManager.heading?.magneticHeading
-        
+        //let attitude = self.motionManager.deviceMotion?.attitude
+        //print("Attitude \(attitude)")
         
         // Create list of url components
         let latQuery = NSURLQueryItem(name: "lat", value: String(lat))
         let longQuery = NSURLQueryItem(name: "long", value: String(long))
-        //let directionQuery = NSURLQueryItem(name: "direction", value: String(cardinality))
-        //let attitudeQuery = NSURLQueryItem(name: "attitude", value: Str)
+        let directionQuery = NSURLQueryItem(name: "direction", value: String(cardinality))
+        //let attitudeQuery = NSURLQueryItem(name: "orientation", value: String(attitude))
         
-        urlComponents.queryItems = [latQuery, longQuery]//, directionQuery]
+        urlComponents.queryItems = [latQuery, longQuery, directionQuery]//, attitudeQuery]
 
         return urlComponents
     }
+    
     
     func getDoodles(action: (doodle: Doodle) -> Void, semaphore: dispatch_semaphore_t) {
         
@@ -154,6 +181,8 @@ class RequestManager: NSObject,CLLocationManagerDelegate {
         
         doodleRequest.setValue("application/octet-stream", forHTTPHeaderField: "Content-Type")
         doodleRequest.HTTPBody = UIImagePNGRepresentation(imageInView)
+        
+        print(doodleRequest.HTTPBody)
         
         let task = self.session!.dataTaskWithRequest(doodleRequest) {
             (data, response, error) in

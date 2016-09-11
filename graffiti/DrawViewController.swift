@@ -154,7 +154,10 @@ class DrawViewController: JotViewController {
     func requestDoodles() {
         requestManager!.getDoodles(self.updatePictureBlock, semaphore: self.gettingDoodlesSemaphore)
         dispatch_semaphore_wait(self.gettingDoodlesSemaphore, DISPATCH_TIME_FOREVER)
-        self.imageView?.image = self.bufferedDoodles[1].getImage()
+        if(self.bufferedDoodles.count >= 1)
+        {
+            self.imageView?.image = self.bufferedDoodles[0].getImage()
+        }
     }
 
     @IBAction func onDraw(sender: AnyObject) {
