@@ -24,6 +24,7 @@ def doodle():
 def tag():
     latitude = float(flask.request.args.get("lat"))
     longitude = float(flask.request.args.get("long"))
+    direction = float(flask.request.args.get("direction"))
     data = flask.request.get_data()
     print("Tag request from (%s,%s), payload: %s bytes" % (latitude, longitude, len(data)))
     return graffiti.logTag(latitude, longitude, data)
