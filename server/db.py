@@ -44,7 +44,7 @@ def getDoodles(latitude, longitude, metadata):
     conn = getConn()
     cursor = conn.cursor()
 
-    sql = "Select id from metadata where abs(latitude - %s) < %s and abs(longitude - %s) < %s;" % (defines.PRECISION % latitude, defines.FUDGE, defines.PRECISION % longitude, defines.FUDGE)
+    sql = "Select id from metadata where abs(latitude - (%s)) < %s and abs(longitude - (%s)) < %s;" % (defines.PRECISION % latitude, defines.FUDGE, defines.PRECISION % longitude, defines.FUDGE)
     print(sql)
     cursor.execute(sql)
     res = cursor.fetchall()
