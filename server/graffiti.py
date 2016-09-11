@@ -16,7 +16,7 @@ from PIL import Image
 
 logger = logging.getLogger('')
 
-def logTag(latitude, longitude, direction, data):
+def logTag(latitude, longitude, direction, orientation, data):
     try:
         filepath = defines.IMAGES_DIR + str(uuid.uuid4()) + ".png"
         stream = StringIO.StringIO(data)
@@ -25,15 +25,15 @@ def logTag(latitude, longitude, direction, data):
         img = Image.open(stream)
         img.save(filepath)
 
-        db.logTag(latitude, longitude, direction, filepath)
+        db.logTag(latitude, longitude, direction, convertOrientation(orientation), filepath)
     except Exception, e:
         print("Error in logTag(): " + str(e))
         return "1" #error
     
     return "0" #ok
 
-def getDoodles(latitude, longitude, direction):
-    paths = db.getDoodles(latitude, longitude, direction)
+def getDoodles(latitude, longitude, direction, orientation):
+    paths = db.getDoodles(latitude, longitude, direction, convertOrientation(orientation))
     logging.warning("paths: %s" % str(paths))
     #print("db.getDoodles() returned %s" % paths)
     return formatDoodleJSON(paths)
@@ -82,6 +82,14 @@ def downvoteDoodle(doodleID):
 
     return "0"
 
+def convertOrientation(orientation):
+    if orientation > -2.0 and orientation < 0.2:
+        return -1.0 #floor
+
+    if orientation >= 0.2 and orientation < 0.6:
+        return 1.0 #ceiling
+
+    return 0.0 #wall
 
 #return flask.jsonify({'id':str(num), 'payloadLength':len(b),'payload':encoded})
         

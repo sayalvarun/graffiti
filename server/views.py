@@ -31,7 +31,7 @@ def doodle():
     orientation = float(flask.request.args.get("orientation"))
     logging.warning("Fetching Doodles for (%s, %s, %s, %s)" % (latitude, longitude, direction, orientation))
 
-    json = graffiti.getDoodles(latitude, longitude, direction) #no metadata for now
+    json = graffiti.getDoodles(latitude, longitude, direction, orientation) #no metadata for now
     return json
 
 #Uploads a tag to the server
@@ -40,9 +40,10 @@ def tag():
     latitude = float(flask.request.args.get("lat"))
     longitude = float(flask.request.args.get("long"))
     direction = float(flask.request.args.get("direction"))
+    orientation = float(flask.request.args.get("orientation"))
     data = flask.request.get_data()
-    logging.warning("Tag request from (%s,%s), direction: %s, payload: %s bytes" % (latitude, longitude, direction, len(data)))
-    return graffiti.logTag(latitude, longitude, direction, data)
+    logging.warning("Tag request from (%s,%s,%s,%s), payload: %s bytes" % (latitude, longitude, direction, orientation, len(data)))
+    return graffiti.logTag(latitude, longitude, direction, orientation, data)
     #print(data)
 
 #Upvotes a doodle
