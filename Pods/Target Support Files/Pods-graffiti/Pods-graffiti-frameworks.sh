@@ -87,11 +87,13 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/ColorSlider/ColorSlider.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Masonry/Masonry.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SnapKit/SnapKit.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Toast-Swift/Toast_Swift.framework"
   install_framework "$BUILT_PRODUCTS_DIR/jot/jot.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/ColorSlider/ColorSlider.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Masonry/Masonry.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SnapKit/SnapKit.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Toast-Swift/Toast_Swift.framework"
   install_framework "$BUILT_PRODUCTS_DIR/jot/jot.framework"
 fi

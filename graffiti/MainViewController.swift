@@ -78,6 +78,18 @@ class MainViewController: UIViewController, JotViewControllerDelegate {
         }
     }
     
+    func takeScreenshot() -> UIImage {
+        let layer = UIApplication.sharedApplication().keyWindow!.layer
+        let scale = UIScreen.mainScreen().scale
+        UIGraphicsBeginImageContextWithOptions(layer.frame.size, false, scale);
+        
+        layer.renderInContext(UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return image
+    }
+    
     func beginSession() {
         configureDevice()
         

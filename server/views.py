@@ -23,9 +23,10 @@ def doodle():
 @server.route('/tag', methods = ['POST'])
 def tag():
     latitude = float(flask.request.args.get("lat"))
-    longitude = float(lask.request.args.get("long"))
+    longitude = float(flask.request.args.get("long"))
     data = flask.request.get_data()
     print("Tag request from (%s,%s), payload: %s bytes" % (latitude, longitude, len(data)))
+    return graffiti.logTag(latitude, longitude, data)
     #print(data)
 
 #Upvotes a doodle

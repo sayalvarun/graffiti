@@ -17,10 +17,12 @@ def logTag(latitude, longitude, data):
     try:
         filepath = defines.IMAGES_DIR + str(uuid.uuid4()) + ".png"
         stream = StringIO.StringIO(data)
+        with open("out.txt", "w") as f:
+            f.write(data)
         img = Image.open(stream)
         img.save(filepath)
 
-        logTag(latitude, longitude, filepath)
+        db.logTag(latitude, longitude, filepath)
     except Exception, e:
         print("Error in logTag(): " + str(e))
         return "1" #error
@@ -38,7 +40,7 @@ def formatDoodleJSON(paths):
     for tup in paths:
         temp = dict()
         temp['id'] = tup[0]
-        temp['payload'] = setPayload("server/" + str(tup[1])) #todo fix?
+        temp['payload'] = setPayload(str(tup[1]))
         entries.append(temp)
 
     json['entries'] = entries
