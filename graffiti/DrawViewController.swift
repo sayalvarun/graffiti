@@ -50,13 +50,12 @@ class DrawViewController: JotViewController {
 
         
         //set up imageview
-        imageView.tag = 2
         imageView.frame = self.view.frame
         
-        let singleTap = UITapGestureRecognizer(target: self, action: #selector(upVote))
-        singleTap.numberOfTapsRequired = 1
-        imageView.userInteractionEnabled = true
-        imageView.addGestureRecognizer(singleTap)
+        //let singleTap = UITapGestureRecognizer(target: self, action: #selector(upVote))
+        //singleTap.numberOfTapsRequired = 1
+        //imageView.userInteractionEnabled = true
+        //imageView.addGestureRecognizer(singleTap)
         
         self.view.addSubview(imageView)
 
@@ -195,7 +194,7 @@ class DrawViewController: JotViewController {
         }
 
         //requestDoodles()
-        self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(DrawViewController.requestDoodles), userInfo: nil, repeats: true)
+        self.timer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: #selector(DrawViewController.requestDoodles), userInfo: nil, repeats: true)
     }
 
     /* Makes an async request to the server asking for all nearby doodles and adds them to the
@@ -206,23 +205,24 @@ class DrawViewController: JotViewController {
         requestManager!.getDoodles(self.updatePictureBlock, semaphore: self.gettingDoodlesSemaphore)
         dispatch_semaphore_wait(self.gettingDoodlesSemaphore, DISPATCH_TIME_FOREVER)
         print("Number of doodles = \(self.bufferedDoodles.count)")
-        if(self.bufferedDoodles.count >= 1) // We are in a state of viewing
-        {
-            self.imageView.image = self.bufferedDoodles[0].getImage()
-            self.currentDoodleID = self.bufferedDoodles[0].getID()
-        }
-        else {
-            self.imageView.image = nil
+        if(self.state == JotViewState.Default || self.state.rawValue == 5){
+            if(self.bufferedDoodles.count >= 1) // We are in a state of viewing
+            {
+                self.imageView.image = self.bufferedDoodles[0].getImage()
+                self.currentDoodleID = self.bufferedDoodles[0].getID()
+            }
+            else {
+                self.imageView.image = nil
+            }
         }
     }
 
     @IBAction func onDraw(sender: AnyObject) {
-        let doodleView = self.view.viewWithTag(2)
-        doodleView?.removeFromSuperview()
         colorButton.backgroundColor = UIColor.redColor()
         strokeButton.imageView?.tintColor = UIColor.redColor()
         self.state = JotViewState.Drawing
         self.toggleDrawing()
+        print(self.state.rawValue)
     }
 
     @IBAction func onSave(sender: AnyObject) {
@@ -254,7 +254,6 @@ class DrawViewController: JotViewController {
 
         UIImageWriteToSavedPhotosAlbum(screenshot, nil, nil, nil)
         self.view.makeToast("Screenshot saved!")
-        self.view.addSubview(imageView)
     }
 
     @IBAction func onSend(sender: AnyObject) {
@@ -266,7 +265,6 @@ class DrawViewController: JotViewController {
         self.view.makeToast("Tag created!")
         self.state = JotViewState.Default
         self.onClose(NSNull)
-        self.view.addSubview(imageView)
     }
     
     @IBAction func onText(sender: AnyObject) {
@@ -279,7 +277,6 @@ class DrawViewController: JotViewController {
         colorButton.backgroundColor = UIColor.clearColor()
         self.state = JotViewState.Default
         self.toggleDrawing()
-        self.view.addSubview(imageView)
     }
 
     func upVote() {
