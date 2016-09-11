@@ -17,7 +17,7 @@ class DrawViewController: JotViewController {
 
     //drawing variables
     let drawButton: UIButton = UIButton(type: .Custom)
-    let saveButton: UIButton = UIButton()
+    let saveButton: UIButton = UIButton(type: .Custom)
     let textButton: UIButton = UIButton(type: .Custom)
     let closeButton: UIButton = UIButton(type: .Custom)
     let undoButton: UIButton = UIButton(type: .Custom)
@@ -168,13 +168,16 @@ class DrawViewController: JotViewController {
 
         //set up save button
         saveButton.hidden = true
-        saveButton.setTitle("Save", forState: .Normal)
+        if let image = UIImage(named: "download") {
+            saveButton.setImage(image, forState: .Normal)
+        }
+
         saveButton.addTarget(self, action: #selector(onSave), forControlEvents: .TouchUpInside)
         self.view.addSubview(saveButton)
 
         saveButton.snp_makeConstraints { (make) -> Void in
-            make.bottom.equalTo(self.view).offset(-20)
-            make.left.equalTo(self.view).offset(20)
+            make.bottom.equalTo(self.view).offset(-10)
+            make.left.equalTo(self.view).offset(10)
         }
 
         //set state of drawing view
