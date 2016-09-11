@@ -23,6 +23,7 @@ class DrawViewController: JotViewController {
     let undoButton: UIButton = UIButton(type: .Custom)
     let sendButton: UIButton = UIButton(type: .Custom)
     let colorSlider: ColorSlider! = ColorSlider()
+    let voteButton: UIButton = UIButton(type: .Custom)
     let colorButton: UIButton = UIButton(type: .Custom)
     let strokeButton: UIButton = UIButton(type: .Custom)
     let strokeImages: [UIImage] = [
@@ -98,8 +99,20 @@ class DrawViewController: JotViewController {
             make.top.equalTo(self.view).offset(8)
             make.right.equalTo(self.view).offset(-100)
         }
-
-
+        
+        //set up text button
+        if let image = UIImage(named: "vote") {
+            voteButton.setImage(image, forState: .Normal)
+        }
+        voteButton.hidden = true
+        voteButton.addTarget(self, action: #selector(upVote), forControlEvents: .TouchUpInside)
+        self.view.addSubview(voteButton)
+        
+        voteButton.snp_makeConstraints { (make) -> Void in
+            make.bottom.equalTo(self.view).offset(-5)
+            make.left.equalTo(self.view).offset(10)
+        }
+        
         //set up stroke button
         strokeButton.hidden = true
         strokeButton.setImage(strokeImages[1], forState: .Normal)
@@ -208,11 +221,13 @@ class DrawViewController: JotViewController {
         if(self.state == JotViewState.Default || self.state.rawValue == 5){
             if(self.bufferedDoodles.count >= 1) // We are in a state of viewing
             {
+                voteButton.hidden = false
                 self.imageView.image = self.bufferedDoodles[0].getImage()
                 self.currentDoodleID = self.bufferedDoodles[0].getID()
             }
             else {
                 self.imageView.image = nil
+                voteButton.hidden = true
             }
         }
     }
@@ -220,11 +235,13 @@ class DrawViewController: JotViewController {
     @IBAction func onDraw(sender: AnyObject) {
         colorButton.backgroundColor = UIColor.redColor()
         strokeButton.imageView?.tintColor = UIColor.redColor()
+        imageView.image = nil
+        voteButton.hidden = true
         self.state = JotViewState.Drawing
         self.toggleDrawing()
         print(self.state.rawValue)
     }
-
+    
     @IBAction func onSave(sender: AnyObject) {
         /*let photoImage: UIImage!
         var camera: UIImage!
@@ -280,8 +297,10 @@ class DrawViewController: JotViewController {
     }
 
     func upVote() {
-        requestManager!.vote(currentDoodleID, up: true)
-        self.view.makeToast("Doodle upvoted!")
+        if(currentDoodleID > 0) {
+            requestManager!.vote(currentDoodleID, up: true)
+            self.view.makeToast("Doodle upvoted!")
+        }
     }
     
     @IBAction func onUndo(sender: AnyObject) {
