@@ -53,7 +53,6 @@ class DrawViewController: JotViewController {
         
         self.view.addSubview(imageView!)
 
-        
         //set up close button
         closeButton.hidden = true
         if let image = UIImage(named: "close") {
@@ -172,16 +171,18 @@ class DrawViewController: JotViewController {
     *  bufferedDoodles. Needs to be called again when we exhaust all the doodles
     */
     func requestDoodles() {
-        //print("Getting doodles")
         self.bufferedDoodles.removeAll()
         requestManager!.getDoodles(self.updatePictureBlock, semaphore: self.gettingDoodlesSemaphore)
         dispatch_semaphore_wait(self.gettingDoodlesSemaphore, DISPATCH_TIME_FOREVER)
-        if(self.bufferedDoodles.count >= 1)
-        {
-            self.imageView?.image = self.bufferedDoodles[0].getImage()
-        }else{
-            self.imageView?.image = nil
-        }
+        print("Number of doodles = \(self.bufferedDoodles.count)")
+        //if(self.state == JotViewState.Default){
+            if(self.bufferedDoodles.count >= 1) // We are in a state of viewing
+            {
+                self.imageView?.image = self.bufferedDoodles[0].getImage()
+            }else{
+                self.imageView?.image = nil
+            }
+        //}
     }
 
     @IBAction func onDraw(sender: AnyObject) {

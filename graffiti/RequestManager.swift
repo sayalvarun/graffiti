@@ -17,11 +17,12 @@ class RequestManager: NSObject,CLLocationManagerDelegate {
     var config : NSURLSessionConfiguration?
     var session: NSURLSession?
     let locationManager = CLLocationManager()
+    let motionManager = CMMotionManager()
     
     var lat : CLLocationDegrees?
     var long: CLLocationDegrees?
     var direction: CLLocationDirection?
-    
+    var attitude: CMAttitude?
     
     class var sharedInstance : RequestManager {
         struct Static {
@@ -48,6 +49,24 @@ class RequestManager: NSObject,CLLocationManagerDelegate {
             self.locationManager.startUpdatingLocation()
             self.locationManager.startUpdatingHeading()
         }
+        
+        self.motionManager.deviceMotionUpdateInterval = 0.1
+        
+        self.motionManager.startDeviceMotionUpdatesToQueue(
+            NSOperationQueue.currentQueue()!, withHandler: {
+                (deviceMotion, error) -> Void in
+                
+                if(error == nil) {
+                    self.attitude = deviceMotion?.attitude
+                } else {
+                    //handle the error
+                }
+        })
+        
+        self.direction = 15.0
+        self.lat = self.locationManager.location!.coordinate.latitude
+        self.long = self.locationManager.location!.coordinate.longitude
+        
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -69,15 +88,18 @@ class RequestManager: NSObject,CLLocationManagerDelegate {
         urlComponents.port = 5000
         urlComponents.path = path
         
-        
-        print("lat = \(self.lat!), long = \(self.long!), direction = \(self.direction!)")
-        
         // Create list of url components
+        
+        
+        print("lat = \(self.lat!), long = \(self.long!), direction = \(self.direction!), aptitude = \(self.attitude!.pitch)")
+
+        
         let latQuery = NSURLQueryItem(name: "lat", value: String(self.lat!))
         let longQuery = NSURLQueryItem(name: "long", value: String(self.long!))
         let directionQuery = NSURLQueryItem(name: "direction", value: String(self.direction!))
+        let orientationQuery = NSURLQueryItem(name: "orientation", value: String(self.attitude!.pitch))
         
-        urlComponents.queryItems = [latQuery, longQuery, directionQuery]
+        urlComponents.queryItems = [latQuery, longQuery, directionQuery, orientationQuery]
 
         return urlComponents
     }
@@ -122,6 +144,11 @@ class RequestManager: NSObject,CLLocationManagerDelegate {
     func getDoodles(action: (doodle: Doodle) -> Void, semaphore: dispatch_semaphore_t) {
         
         let urlComponents : NSURLComponents = getPopulatedUrlComponents("/doodle")
+        
+        if (urlComponents.queryItems == nil) // Never setup params
+        {
+            dispatch_semaphore_signal(semaphore)
+        }
         
         guard let getDoodlesUrl = urlComponents.URL else {
             print("Error: cannot create URL")
@@ -182,6 +209,11 @@ class RequestManager: NSObject,CLLocationManagerDelegate {
     func tagDoodle(imageInView: UIImage){
         
         let urlComponents : NSURLComponents = getPopulatedUrlComponents("/tag")
+        
+        if (urlComponents.queryItems == nil) // Never setup params
+        {
+            return
+        }
         
         guard let tagUrl = urlComponents.URL else {
             print("Error: cannot create URL")
