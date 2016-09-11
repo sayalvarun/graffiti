@@ -22,32 +22,5 @@
             </objects>
             <point key="canvasLocation" x="130" y="328"/>
         </scene>
-        <!--Draw View Controller-->
-        <scene sceneID="28O-3P-JLr">
-            <objects>
-                <viewController storyboardIdentifier="DrawViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tn5-Gl-KlH" customClass="DrawViewController" customModule="graffiti" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="MaQ-cL-rQr"/>
-                        <viewControllerLayoutGuide type="bottom" id="nVB-ev-vgm"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="3g0-ib-7S1">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tSS-g7-47C">
-                                <rect key="frame" x="145" y="518" width="30" height="30"/>
-                                <state key="normal" title="Test"/>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <connections>
-                        <outlet property="saveButton" destination="tSS-g7-47C" id="tFL-E6-YPc"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Flm-4c-xDg" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="502" y="328"/>
-        </scene>
     </scenes>
 </document>
