@@ -37,7 +37,7 @@ class DrawViewController: JotViewController {
     var requestManager: RequestManager?
     var updatePictureBlock:(doodle: Doodle)->Void = { arg in }
     var imageView : UIImageView?
-    var currentDoodleID : Int32 = 0 // Stores the id of the doodle on the screen if any
+    var currentDoodleID : Int32 = -1 // Stores the id of the doodle on the screen if any
     var bufferedDoodles : [Doodle] = []
     var gettingDoodlesSemaphore : dispatch_semaphore_t = dispatch_semaphore_create(0)
     let kSemaphoreWaitTime : Int64 = 15 // Wait for 15 seconds for the semaphore
@@ -52,6 +52,11 @@ class DrawViewController: JotViewController {
         //set up imageview
         self.imageView = UIImageView(frame: CGRect(x: 75, y: 150, width: 200, height: 400))
         imageView!.frame = self.view.frame
+        
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(upVote))
+        singleTap.numberOfTapsRequired = 1
+        imageView!.userInteractionEnabled = true
+        imageView!.addGestureRecognizer(singleTap)
         
         self.view.addSubview(imageView!)
 
@@ -131,7 +136,7 @@ class DrawViewController: JotViewController {
         let colorSliderHeight = CGFloat(150)
         let colorSliderPadding = CGFloat(15)
 
-        colorSlider.frame = CGRectMake(view.bounds.width - colorSliderWidth - colorSliderPadding - 5, 40 + colorSliderPadding, colorSliderWidth, colorSliderHeight)
+        colorSlider.frame = CGRectMake(view.bounds.width - colorSliderWidth - colorSliderPadding - 5, 50 + colorSliderPadding, colorSliderWidth, colorSliderHeight)
         colorSlider.hidden = true
         colorSlider.addTarget(self, action: #selector(changedColor), forControlEvents: .ValueChanged)
         colorSlider.addTarget(self, action: #selector(changedColor), forControlEvents: .TouchUpInside)
@@ -177,7 +182,7 @@ class DrawViewController: JotViewController {
 
         saveButton.snp_makeConstraints { (make) -> Void in
             make.bottom.equalTo(self.view).offset(-10)
-            make.left.equalTo(self.view).offset(10)
+            make.left.equalTo(self.view).offset(5)
         }
 
         //set state of drawing view
@@ -201,13 +206,18 @@ class DrawViewController: JotViewController {
         requestManager!.getDoodles(self.updatePictureBlock, semaphore: self.gettingDoodlesSemaphore)
         dispatch_semaphore_wait(self.gettingDoodlesSemaphore, DISPATCH_TIME_FOREVER)
         print("Number of doodles = \(self.bufferedDoodles.count)")
-        if(self.state == JotViewState.Default){
+        if(self.state == JotViewState.Default || self.state.rawValue == 5){
             if(self.bufferedDoodles.count >= 1) // We are in a state of viewing
             {
                 self.imageView?.image = self.bufferedDoodles[0].getImage()
+                self.currentDoodleID = self.bufferedDoodles[0].getID()
             }else{
                 self.imageView?.image = nil
+                self.currentDoodleID = -1
             }
+        } else {
+            self.imageView?.image = nil
+            self.currentDoodleID = -1
         }
     }
 
@@ -256,6 +266,7 @@ class DrawViewController: JotViewController {
         self.requestManager!.tagDoodle(doodle)
         colorSlider.hidden = true
         colorButton.backgroundColor = UIColor.clearColor()
+        self.view.makeToast("Tag created!")
         self.state = JotViewState.Default
         self.onClose(NSNull)
     }
@@ -272,6 +283,11 @@ class DrawViewController: JotViewController {
         self.toggleDrawing()
     }
 
+    func upVote() {
+        requestManager!.vote(currentDoodleID, up: true)
+        self.view.makeToast("Doodle upvoted!")
+    }
+    
     @IBAction func onUndo(sender: AnyObject) {
         self.undo()
     }
