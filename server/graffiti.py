@@ -10,8 +10,11 @@ import flask
 import datetime
 import defines
 import sqlite3
+import logging
 import cStringIO as StringIO
 from PIL import Image
+
+logger = logging.getLogger('')
 
 def logTag(latitude, longitude, direction, data):
     try:
@@ -31,7 +34,8 @@ def logTag(latitude, longitude, direction, data):
 
 def getDoodles(latitude, longitude, direction):
     paths = db.getDoodles(latitude, longitude, direction)
-    print("db.getDoodles() returned %s" % paths)
+    logging.warning("paths: %s" % str(paths))
+    #print("db.getDoodles() returned %s" % paths)
     return formatDoodleJSON(paths)
 
 def formatDoodleJSON(paths):
