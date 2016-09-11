@@ -198,14 +198,14 @@ class DrawViewController: JotViewController {
         requestManager!.getDoodles(self.updatePictureBlock, semaphore: self.gettingDoodlesSemaphore)
         dispatch_semaphore_wait(self.gettingDoodlesSemaphore, DISPATCH_TIME_FOREVER)
         print("Number of doodles = \(self.bufferedDoodles.count)")
-        //if(self.state == JotViewState.Default){
+        if(self.state == JotViewState.Default){
             if(self.bufferedDoodles.count >= 1) // We are in a state of viewing
             {
                 self.imageView?.image = self.bufferedDoodles[0].getImage()
             }else{
                 self.imageView?.image = nil
             }
-        //}
+        }
     }
 
     @IBAction func onDraw(sender: AnyObject) {
