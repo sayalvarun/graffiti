@@ -13,7 +13,7 @@ import sqlite3
 import cStringIO as StringIO
 from PIL import Image
 
-def logTag(latitude, longitude, data):
+def logTag(latitude, longitude, direction, data):
     try:
         filepath = defines.IMAGES_DIR + str(uuid.uuid4()) + ".png"
         stream = StringIO.StringIO(data)
@@ -22,15 +22,15 @@ def logTag(latitude, longitude, data):
         img = Image.open(stream)
         img.save(filepath)
 
-        db.logTag(latitude, longitude, filepath)
+        db.logTag(latitude, longitude, direction, filepath)
     except Exception, e:
         print("Error in logTag(): " + str(e))
         return "1" #error
     
     return "0" #ok
 
-def getDoodles(latitude, longitude, metadata):
-    paths = db.getDoodles(latitude, longitude, metadata)
+def getDoodles(latitude, longitude, direction):
+    paths = db.getDoodles(latitude, longitude, direction)
     print("db.getDoodles() returned %s" % paths)
     return formatDoodleJSON(paths)
 
