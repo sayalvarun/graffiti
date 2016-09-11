@@ -44,7 +44,7 @@ def getDoodles(latitude, longitude, metadata):
     conn = getConn()
     cursor = conn.cursor()
 
-    sql = "Select id from metadata where abs(latitude - (%s)) < %s and abs(longitude - (%s)) < %s;" % (defines.PRECISION % latitude, defines.FUDGE, defines.PRECISION % longitude, defines.FUDGE)
+    sql = "Select id from metadata where Round(latitude,%s) = %s and Round(longitude,%s) = %s;" % (defines.ROUNDING, defines.PRECISION % latitude, defines.ROUNDING, defines.PRECISION % longitude)
     print(sql)
     cursor.execute(sql)
     res = cursor.fetchall()
@@ -67,6 +67,15 @@ def upvote(doodleID):
     cursor = conn.cursor()
 
     sql = "Update doodles set votes = votes + 1 where id=%s" % doodleID
+    cursor.execute(sql)
+    conn.commit()
+    conn.close()
+
+def downvote(doodleID):
+    conn = getConn()
+    cursor = conn.cursor()
+
+    sql = "Update doodles set votes = votes - 1 where id=%s" % doodleID
     cursor.execute(sql)
     conn.commit()
     conn.close()
