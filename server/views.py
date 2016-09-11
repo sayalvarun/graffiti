@@ -28,8 +28,8 @@ def doodle():
     latitude = float(flask.request.args.get("lat"))
     longitude = float(flask.request.args.get("long"))
     direction = float(flask.request.args.get("direction"))
-    #orientation = float(flask.request.args.get("orientation"))
-    logging.warning("Fetching Doodles for (%s, %s, %s)" % (latitude, longitude, direction))
+    orientation = float(flask.request.args.get("orientation"))
+    logging.warning("Fetching Doodles for (%s, %s, %s, %s)" % (latitude, longitude, direction, orientation))
 
     json = graffiti.getDoodles(latitude, longitude, direction) #no metadata for now
     return json
