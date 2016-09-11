@@ -47,7 +47,7 @@ def getDoodles(latitude, longitude, direction):
     paths = []
     #sql = "Select path from metadata join doodles on metadata.id=doodles.metadata_id where Round(latitude,%s) = %s and Round(longitude,%s) = %s and direction > (%s - %s) and direction < (%s + %s) order by votes;" % (defines.ROUNDING, defines.PRECISION % latitude, defines.ROUNDING, defines.PRECISION % longitude, direction, defines.FUDGE, direction, defines.FUDGE)
     sql = "Select doodles.id,path from metadata join doodles on metadata.id=doodles.metadata_id where Round(latitude,%s) = %s and Round(longitude,%s) = %s and direction > (%s - %s) and direction < (%s + %s) order by votes DESC limit 1;" % (defines.ROUNDING, defines.PRECISION % latitude, defines.ROUNDING, defines.PRECISION % longitude, direction, defines.FUDGE, direction, defines.FUDGE)
-    print(sql)
+    #print(sql)
     cursor.execute(sql)
     res = cursor.fetchone()
     if res == None:
