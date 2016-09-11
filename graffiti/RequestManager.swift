@@ -17,7 +17,10 @@ class RequestManager: NSObject,CLLocationManagerDelegate {
     var config : NSURLSessionConfiguration?
     var session: NSURLSession?
     let locationManager = CLLocationManager()
-    var motionManager = CMMotionManager()
+    
+    var lat : CLLocationDegrees?
+    var long: CLLocationDegrees?
+    var direction: CLLocationDirection?
     
     
     class var sharedInstance : RequestManager {
@@ -45,34 +48,16 @@ class RequestManager: NSObject,CLLocationManagerDelegate {
             self.locationManager.startUpdatingLocation()
             self.locationManager.startUpdatingHeading()
         }
-        
-//        self.motionManager = CMMotionManager()
-//        if self.motionManager.deviceMotionAvailable == true {
-//            
-//            self.motionManager.deviceMotionUpdateInterval = 0.1;
-//            
-////            let queue = NSOperationQueue()
-////            self.motionManager.startDeviceMotionUpdatesToQueue(queue, withHandler: { [weak self] (motion, error) -> Void in
-////                
-////                // Get the attitude of the device
-////                if let attitude = motion?.attitude {
-////                    // Get the pitch (in radians) and convert to degrees.
-////                    // Import Darwin to get M_PI in Swift
-////                    print(attitude.pitch * 180.0/M_PI)
-////                    
-////                    dispatch_async(dispatch_get_main_queue()) {
-////                        // Update some UI
-////                    }
-////                }
-////                
-////                })
-//
-//            self.motionManager.startDeviceMotionUpdates()
-//            print("Device motion started")
-//        }
-//        else {
-//            print("Device motion unavailable");
-//        }
+    }
+    
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let locValue:CLLocationCoordinate2D = manager.location!.coordinate
+        self.lat = locValue.latitude
+        self.long = locValue.longitude
+    }
+    
+    func locationManager(manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+        self.direction = newHeading.magneticHeading
     }
     
     func getPopulatedUrlComponents(path: String) -> NSURLComponents
@@ -84,28 +69,55 @@ class RequestManager: NSObject,CLLocationManagerDelegate {
         urlComponents.port = 5000
         urlComponents.path = path
         
-        guard let gpslocation = self.locationManager.location?.coordinate else{
-            print("Error: Could not get GPS coordinates")
-            return NSURLComponents()
-        }
-        // Grab lat long
-        let lat = gpslocation.latitude
-        let long = gpslocation.longitude
-        let cardinality = self.locationManager.heading?.magneticHeading
-        //let attitude = self.motionManager.deviceMotion?.attitude
-        //print("Attitude \(attitude)")
+        
+        print("lat = \(self.lat!), long = \(self.long!), direction = \(self.direction!)")
         
         // Create list of url components
-        let latQuery = NSURLQueryItem(name: "lat", value: String(lat))
-        let longQuery = NSURLQueryItem(name: "long", value: String(long))
-        let directionQuery = NSURLQueryItem(name: "direction", value: String(cardinality))
-        //let attitudeQuery = NSURLQueryItem(name: "orientation", value: String(attitude))
+        let latQuery = NSURLQueryItem(name: "lat", value: String(self.lat!))
+        let longQuery = NSURLQueryItem(name: "long", value: String(self.long!))
+        let directionQuery = NSURLQueryItem(name: "direction", value: String(self.direction!))
         
-        urlComponents.queryItems = [latQuery, longQuery, directionQuery]//, attitudeQuery]
+        urlComponents.queryItems = [latQuery, longQuery, directionQuery]
 
         return urlComponents
     }
     
+    func vote(id: Int32, up: Bool)
+    {
+        // Set up base URL
+        let urlComponents = NSURLComponents()
+        urlComponents.scheme = "http"
+        urlComponents.host = "varunsayal.com"
+        urlComponents.port = 5000
+        if(up){
+            urlComponents.path = "/upvote"
+        }else{
+            urlComponents.path = "/downvote"
+        }
+        
+        let idQuery = NSURLQueryItem(name: "id", value: String(id))
+        urlComponents.queryItems = [idQuery]
+        
+        guard let upvoteUrl = urlComponents.URL else {
+            print("Error: cannot create URL")
+            return
+        }
+        
+        let urlRequest = NSURLRequest(URL: upvoteUrl)
+        let task = self.session!.dataTaskWithRequest(urlRequest) {
+            (data, response, error) in
+            // check for any errors
+            guard error == nil else {
+                print("error calling GET on /todos/1")
+                print(error)
+                return
+            }
+            
+        }
+        
+        task.resume()
+        
+    }
     
     func getDoodles(action: (doodle: Doodle) -> Void, semaphore: dispatch_semaphore_t) {
         
@@ -181,8 +193,6 @@ class RequestManager: NSObject,CLLocationManagerDelegate {
         
         doodleRequest.setValue("application/octet-stream", forHTTPHeaderField: "Content-Type")
         doodleRequest.HTTPBody = UIImagePNGRepresentation(imageInView)
-        
-        print(doodleRequest.HTTPBody)
         
         let task = self.session!.dataTaskWithRequest(doodleRequest) {
             (data, response, error) in

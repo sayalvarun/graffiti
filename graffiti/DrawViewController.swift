@@ -41,6 +41,8 @@ class DrawViewController: JotViewController {
     var bufferedDoodles : [Doodle] = []
     var gettingDoodlesSemaphore : dispatch_semaphore_t = dispatch_semaphore_create(0)
     let kSemaphoreWaitTime : Int64 = 15 // Wait for 15 seconds for the semaphore
+    
+    var timer = NSTimer()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,17 +50,9 @@ class DrawViewController: JotViewController {
 
         self.imageView = UIImageView(frame: CGRect(x: 75, y: 150, width: 200, height: 400))
         imageView!.frame = self.view.frame
+        
+        self.view.addSubview(imageView!)
 
-        self.view.addSubview(self.imageView!)
-
-        self.requestManager = RequestManager()
-        self.updatePictureBlock = {(doodle: Doodle) -> Void in
-            self.bufferedDoodles.append(doodle)
-        }
-
-        requestManager!.getDoodles(self.updatePictureBlock, semaphore: self.gettingDoodlesSemaphore)
-        dispatch_semaphore_wait(self.gettingDoodlesSemaphore, DISPATCH_TIME_FOREVER)
-        self.imageView?.image = self.bufferedDoodles[1].getImage()
         
         //set up close button
         closeButton.hidden = true
@@ -170,18 +164,23 @@ class DrawViewController: JotViewController {
             self.bufferedDoodles.append(doodle)
         }
 
-        requestDoodles()
+        //requestDoodles()
+        self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(DrawViewController.requestDoodles), userInfo: nil, repeats: true)
     }
 
     /* Makes an async request to the server asking for all nearby doodles and adds them to the
     *  bufferedDoodles. Needs to be called again when we exhaust all the doodles
     */
     func requestDoodles() {
+        //print("Getting doodles")
+        self.bufferedDoodles.removeAll()
         requestManager!.getDoodles(self.updatePictureBlock, semaphore: self.gettingDoodlesSemaphore)
         dispatch_semaphore_wait(self.gettingDoodlesSemaphore, DISPATCH_TIME_FOREVER)
         if(self.bufferedDoodles.count >= 1)
         {
             self.imageView?.image = self.bufferedDoodles[0].getImage()
+        }else{
+            self.imageView?.image = nil
         }
     }
 
