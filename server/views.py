@@ -36,3 +36,11 @@ def upvote():
     print("Upvote request for id %s" % doodleID)
     
     return graffiti.upvoteDoodle(doodleID)
+
+#Upvotes a doodle
+@server.route('/downvote')
+def downvote():
+    doodleID = int(flask.request.args.get("id"))
+    print("Downvote request for id %s" % doodleID)
+    
+    return graffiti.downvoteDoodle(doodleID)

@@ -69,6 +69,15 @@ def upvoteDoodle(doodleID):
 
     return "0"
 
+def downvoteDoodle(doodleID):
+    try:
+        db.downvote(doodleID)
+    except Exception, e:
+        print("Error in downvoteDoodle(): %s" % str(e))
+        return "1: " + str(e)
+
+    return "0"
+
 
 #return flask.jsonify({'id':str(num), 'payloadLength':len(b),'payload':encoded})
         
