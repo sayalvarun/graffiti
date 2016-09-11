@@ -40,7 +40,7 @@ def formatDoodleJSON(paths):
     for tup in paths:
         temp = dict()
         temp['id'] = tup[0]
-        temp['payload'] = setPayload("server/" + str(tup[1])) #todo fix?
+        temp['payload'] = setPayload(str(tup[1]))
         entries.append(temp)
 
     json['entries'] = entries
