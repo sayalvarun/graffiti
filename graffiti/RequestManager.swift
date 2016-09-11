@@ -10,12 +10,15 @@
 import Darwin
 import UIKit
 import CoreLocation
+import CoreMotion
 
 class RequestManager: NSObject,CLLocationManagerDelegate {
     
     var config : NSURLSessionConfiguration?
     var session: NSURLSession?
     let locationManager = CLLocationManager()
+    let motionManager = CMDeviceMotion()
+    
     
     class var sharedInstance : RequestManager {
         struct Static {
@@ -40,16 +43,53 @@ class RequestManager: NSObject,CLLocationManagerDelegate {
             self.locationManager.delegate = self
             self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
             self.locationManager.startUpdatingLocation()
+            self.locationManager.startUpdatingHeading()
         }
+        
+        //let ref = CMAttitudeReferenceFrame.XArbitraryZVertical
+        //startDeviceMo
     }
     
-    func getDoodle(action: (doodle: Doodle) -> Void, semaphore: dispatch_semaphore_t) {
-        let todoEndpoint: String = "http://varunsayal.com:5000/doodle"
-        guard let url = NSURL(string: todoEndpoint) else {
-            print("Error: cannot create URL")
-            return 
+    func getPopulatedUrlComponents(path: String) -> NSURLComponents
+    {
+        // Set up base URL
+        let urlComponents = NSURLComponents()
+        urlComponents.scheme = "http"
+        urlComponents.host = "varunsayal.com"
+        urlComponents.port = 5000
+        urlComponents.path = path
+        
+        guard let gpslocation = self.locationManager.location?.coordinate else{
+            print("Error: Could not get GPS coordinates")
+            return NSURLComponents()
         }
-        let urlRequest = NSURLRequest(URL: url)
+        // Grab lat long
+        let lat = gpslocation.latitude
+        let long = gpslocation.longitude
+        let cardinality = self.locationManager.heading?.magneticHeading
+        
+        
+        // Create list of url components
+        let latQuery = NSURLQueryItem(name: "lat", value: String(lat))
+        let longQuery = NSURLQueryItem(name: "long", value: String(long))
+        //let directionQuery = NSURLQueryItem(name: "direction", value: String(cardinality))
+        //let attitudeQuery = NSURLQueryItem(name: "attitude", value: Str)
+        
+        urlComponents.queryItems = [latQuery, longQuery]//, directionQuery]
+
+        return urlComponents
+    }
+    
+    func getDoodles(action: (doodle: Doodle) -> Void, semaphore: dispatch_semaphore_t) {
+        
+        let urlComponents : NSURLComponents = getPopulatedUrlComponents("/doodle")
+        
+        guard let getDoodlesUrl = urlComponents.URL else {
+            print("Error: cannot create URL")
+            return
+        }
+        
+        let urlRequest = NSURLRequest(URL: getDoodlesUrl)
         let task = self.session!.dataTaskWithRequest(urlRequest) {
             (data, response, error) in
             // check for any errors
@@ -71,10 +111,10 @@ class RequestManager: NSObject,CLLocationManagerDelegate {
                 
                 for entry in entries as! [Dictionary<String, AnyObject>]
                 {
-                    let doodleID = entry["id"] as! Int32
-                    let payload = entry["payload"] as! String
+                    let doodleID = entry["id"]
+                    let payload = entry["payload"]
                     
-                    guard let decodedData = NSData(base64EncodedString: payload, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters) else{
+                    guard let decodedData = NSData(base64EncodedString: String(payload), options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters) else{
                         print("Error: Decoding from base64")
                         return
                     }
@@ -84,7 +124,7 @@ class RequestManager: NSObject,CLLocationManagerDelegate {
                     
                     if let image = UIImage(data: realDecodedData, scale: 1.0)
                     {
-                        action(doodle: Doodle(id: doodleID, image: image))
+                        action(doodle: Doodle(id: Int32(String(doodleID!))!, image: image))
                     }else{
                         print("Error: Could not make image")
                     }
@@ -100,27 +140,9 @@ class RequestManager: NSObject,CLLocationManagerDelegate {
         task.resume()
     }
     
-    func tagDoodle(doodle: NSData){
+    func tagDoodle(imageInView: UIImage){
         
-        // Set up base URL
-        let urlComponents = NSURLComponents()
-        urlComponents.scheme = "http"
-        urlComponents.host = "varunsayal.com"
-        urlComponents.port = 5000
-        urlComponents.path = "/tag"
-        
-        guard let gpslocation = self.locationManager.location?.coordinate else{
-            print("Error: Could not get GPS coordinates")
-            return
-        }
-        // Grab lat long
-        let lat = gpslocation.latitude
-        let long = gpslocation.longitude
-        
-        // Create list of url components
-        let latQuery = NSURLQueryItem(name: "lat", value: String(lat))
-        let longQuery = NSURLQueryItem(name: "long", value: String(long))
-        urlComponents.queryItems = [latQuery, longQuery]
+        let urlComponents : NSURLComponents = getPopulatedUrlComponents("/tag")
         
         guard let tagUrl = urlComponents.URL else {
             print("Error: cannot create URL")
@@ -131,7 +153,7 @@ class RequestManager: NSObject,CLLocationManagerDelegate {
         doodleRequest.HTTPMethod = "POST"
         
         doodleRequest.setValue("application/octet-stream", forHTTPHeaderField: "Content-Type")
-        doodleRequest.HTTPBody = doodle
+        doodleRequest.HTTPBody = UIImagePNGRepresentation(imageInView)
         
         let task = self.session!.dataTaskWithRequest(doodleRequest) {
             (data, response, error) in
