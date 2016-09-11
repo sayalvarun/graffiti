@@ -12,11 +12,11 @@ def index():
 def doodle():
     latitude = float(flask.request.args.get("lat"))
     longitude = float(flask.request.args.get("long"))
-    #direction = float(flask.request.args.get("direction"))
+    direction = float(flask.request.args.get("direction"))
     #orientation = float(flask.request.args.get("orientation"))
     print("Fetching Doodles for (%s,%s)" % (latitude, longitude))
 
-    json = graffiti.getDoodles(latitude, longitude, None) #no metadata for now
+    json = graffiti.getDoodles(latitude, longitude, direction) #no metadata for now
     return json
 
 #Uploads a tag to the server

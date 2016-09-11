@@ -40,14 +40,19 @@ def logTag(latitude, longitude, filepath):
 
     conn.close()
 
-def getDoodles(latitude, longitude, metadata):
+def getDoodles(latitude, longitude, direction):
     conn = getConn()
     cursor = conn.cursor()
 
-    sql = "Select id from metadata where Round(latitude,%s) = %s and Round(longitude,%s) = %s;" % (defines.ROUNDING, defines.PRECISION % latitude, defines.ROUNDING, defines.PRECISION % longitude)
+    paths = []
+    #sql = "Select path from metadata join doodles on metadata.id=doodles.metadata_id where Round(latitude,%s) = %s and Round(longitude,%s) = %s and direction > (%s - %s) and direction < (%s + %s) order by votes;" % (defines.ROUNDING, defines.PRECISION % latitude, defines.ROUNDING, defines.PRECISION % longitude, direction, defines.FUDGE, direction, defines.FUDGE)
+    sql = "Select id,path from metadata join doodles on metadata.id=doodles.metadata_id where Round(latitude,%s) = %s and Round(longitude,%s) = %s and direction > (%s - %s) and direction < (%s + %s) order by votes DESC limit 1;" % (defines.ROUNDING, defines.PRECISION % latitude, defines.ROUNDING, defines.PRECISION % longitude, direction, defines.FUDGE, direction, defines.FUDGE)
     print(sql)
     cursor.execute(sql)
-    res = cursor.fetchall()
+    res = cursor.fetchone()
+    paths.append((res[0], res[1]))
+    
+    '''
     #print("RES: " + str(res))
     arr = []
     for row in res:
@@ -59,7 +64,7 @@ def getDoodles(latitude, longitude, metadata):
         cursor.execute(sql)
         res = cursor.fetchone()[0]
         paths.append((ID,res))
-
+    '''
     return paths
 
 def upvote(doodleID):

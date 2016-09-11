@@ -29,8 +29,8 @@ def logTag(latitude, longitude, data):
     
     return "0" #ok
 
-def getDoodles(latitude, longitude, metadata):
-    paths = db.getDoodles(latitude, longitude, metadata)
+def getDoodles(latitude, longitude, direction):
+    paths = db.getDoodles(latitude, longitude, direction)
     print("db.getDoodles() returned %s" % paths)
     return formatDoodleJSON(paths)
 
