@@ -44,12 +44,10 @@ def getDoodles(latitude, longitude, metadata):
     conn = getConn()
     cursor = conn.cursor()
 
-    sql = "Select id from metadata where latitude=39.9515 and longitude=-75.1910;"
-    #sql = "Select id from metadata where latitude=%s and longitude=%s;" % (defines.PRECISION % latitude, defines.PRECISION % longitude)
-    print(sql)
+    sql = "Select id from metadata where latitude=%s and longitude=%s;" % (defines.PRECISION % latitude, defines.PRECISION % longitude)
     cursor.execute(sql)
     res = cursor.fetchall()
-    print("RES: " + str(res))
+    #print("RES: " + str(res))
     arr = []
     for row in res:
         arr.append(row[0]) #append IDs
@@ -62,6 +60,15 @@ def getDoodles(latitude, longitude, metadata):
         paths.append((ID,res))
 
     return paths
+
+def upvote(doodleID):
+    conn = getConn()
+    cursor = conn.cursor()
+
+    sql = "Update doodles set votes = votes + 1 where id=%s" % doodleID
+    cursor.execute(sql)
+    conn.commit()
+    conn.close()
 
 #TODO get votes, add vote
 

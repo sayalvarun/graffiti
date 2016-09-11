@@ -58,6 +58,16 @@ def setPayload(filepath):
 
     return base64.b64encode(b)
 
+def upvoteDoodle(doodleID):
+    try:
+        db.upvote(doodleID)
+    except Exception, e:
+        print("Error in upvoteDoodle(): %s" % str(e))
+        return "1: " + str(e)
+
+    return "0"
+
+
 #return flask.jsonify({'id':str(num), 'payloadLength':len(b),'payload':encoded})
         
 def convert(num):
