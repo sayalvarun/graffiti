@@ -41,8 +41,6 @@
 	</dict>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>We need your location to show you Graffiti around you</string>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
