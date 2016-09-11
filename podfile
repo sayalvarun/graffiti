@@ -9,4 +9,5 @@ target 'graffiti' do
 	pod 'jot'
 	pod 'SnapKit'
 	pod 'ColorSlider'
+	pod 'Toast-Swift'
 end
