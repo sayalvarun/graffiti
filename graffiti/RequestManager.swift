@@ -64,8 +64,8 @@ class RequestManager: NSObject,CLLocationManagerDelegate {
         })
         
         self.direction = 15.0
-        self.lat = self.locationManager.location!.coordinate.latitude
-        self.long = self.locationManager.location!.coordinate.longitude
+        self.lat = 10.0
+        self.long = 10.0
         
     }
     
