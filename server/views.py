@@ -1,14 +1,5 @@
 import flask
-import base64
-import io
-import os
-import json
-import re
-import binascii
-import datetime
-
-import cStringIO as StringIO
-from PIL import Image
+import graffiti
 from server import server
 
 @server.route('/')
@@ -17,42 +8,20 @@ def index():
     return "Hello, World!"
 
 @server.route('/doodle')
-def sendImage():
-    if os.path.isfile("server/file.jpg"):
-        print("file present")
-        with open("server/file.jpg", "rb") as imageFile:
-            f = imageFile.read()
-            b = bytearray(f)
-            num = 343251 # \x00\x05\x3C\xD3
-            #print("343251 is " + num)
-	    encoded = base64.b64encode(b)
-	    print(binascii.hexlify(b))
-            return flask.jsonify({'id':str(num), 'payloadLength':len(b),'payload':encoded})
-            #return (num + str(b))
-    else:
-        print("ERROR: file not found")
+def doodle():
+    latitude = float(flask.request.args.get("lat"))
+    longitude = float(flask.request.args.get("long"))
+    print("Fetching Doodles for (%s,%s)" % (latitude, longitude))
 
-    return None
-    #return flask.send_file('file.jpg')
+    json = graffiti.getDoodles(latitude, longitude, None) #no metadata for now
+    return json
 
 @server.route('/tag', methods = ['POST'])
-def logTag():
-    latitude = flask.request.args.get("lat")
-    longitude = flask.request.args.get("long")
+def tag():
+    latitude = float(flask.request.args.get("lat"))
+    longitude = float(lask.request.args.get("long"))
     data = flask.request.get_data()
+    print("Tag request from (%s,%s), payload: %s bytes" % (latitude, longitude, len(data)))
     #print(data)
-    #print("Received %s bytes" % len(data))
-    #print("(%s,%s)" % (latitude, longitude))
-    try:
-        #b_data = binascii.unhexlify(data)
-        stream = StringIO.StringIO(data)
-        img = Image.open(stream)
-        img.save("image.png")
-    except Exception, e:
-        print("ERROR: " + str(e))
-        return "1" #error
     
-    return "0" #ok
-
-def convert(num):
-    return re.sub(r'([0-9A-F]{2})',r'\\x\1','%08X' % num)
+    return graffiti.logTag(latitude, longitude, data)
