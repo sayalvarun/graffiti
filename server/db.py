@@ -23,11 +23,11 @@ def initDB():
         os.makedirs(defines.IMAGES_DIR)
 
 
-def logTag(latitude, longitude, filepath):
+def logTag(latitude, longitude, direction, filepath):
     conn = getConn()
     cursor = conn.cursor()
 
-    sql = "Insert into metadata(latitude, longitude) values (%s,%s);" % (latitude, longitude)
+    sql = "Insert into metadata(latitude, longitude, direction) values (%s,%s,%s);" % (latitude, longitude, direction)
     cursor = conn.cursor()
     cursor.execute(sql)
     conn.commit()
