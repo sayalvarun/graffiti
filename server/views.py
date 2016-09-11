@@ -27,7 +27,7 @@ def tag():
     direction = float(flask.request.args.get("direction"))
     data = flask.request.get_data()
     print("Tag request from (%s,%s), payload: %s bytes" % (latitude, longitude, len(data)))
-    return graffiti.logTag(latitude, longitude, data)
+    return graffiti.logTag(latitude, longitude, direction, data)
     #print(data)
 
 #Upvotes a doodle

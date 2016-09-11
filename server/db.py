@@ -50,6 +50,8 @@ def getDoodles(latitude, longitude, direction):
     print(sql)
     cursor.execute(sql)
     res = cursor.fetchone()
+    if res == None:
+        return paths
     paths.append((res[0], res[1]))
     
     '''
