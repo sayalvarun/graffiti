@@ -16,11 +16,12 @@ import Toast_Swift
 class DrawViewController: JotViewController {
 
     //drawing variables
-    let drawButton: UIButton = UIButton()
+    let drawButton: UIButton = UIButton(type: .Custom)
     let saveButton: UIButton = UIButton()
+    let textButton: UIButton = UIButton(type: .Custom)
     let closeButton: UIButton = UIButton(type: .Custom)
-    let undoButton: UIButton = UIButton()
-    let sendButton: UIButton = UIButton()
+    let undoButton: UIButton = UIButton(type: .Custom)
+    let sendButton: UIButton = UIButton(type: .Custom)
     let colorSlider: ColorSlider! = ColorSlider()
     let colorButton: UIButton = UIButton(type: .Custom)
     let strokeButton: UIButton = UIButton(type: .Custom)
@@ -30,7 +31,6 @@ class DrawViewController: JotViewController {
         UIImage(named: "stroke-3")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate),
         UIImage(named: "stroke-4")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate),
     ]
-
     var strokeIndex = 1
 
     //graffiti variables
@@ -41,24 +41,20 @@ class DrawViewController: JotViewController {
     var bufferedDoodles : [Doodle] = []
     var gettingDoodlesSemaphore : dispatch_semaphore_t = dispatch_semaphore_create(0)
     let kSemaphoreWaitTime : Int64 = 15 // Wait for 15 seconds for the semaphore
+    
+    var timer = NSTimer()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
 
+        
+        //set up imageview
         self.imageView = UIImageView(frame: CGRect(x: 75, y: 150, width: 200, height: 400))
         imageView!.frame = self.view.frame
+        
+        self.view.addSubview(imageView!)
 
-        self.view.addSubview(self.imageView!)
-
-        self.requestManager = RequestManager()
-        self.updatePictureBlock = {(doodle: Doodle) -> Void in
-            self.bufferedDoodles.append(doodle)
-        }
-
-        requestManager!.getDoodles(self.updatePictureBlock, semaphore: self.gettingDoodlesSemaphore)
-        dispatch_semaphore_wait(self.gettingDoodlesSemaphore, DISPATCH_TIME_FOREVER)
-        self.imageView?.image = self.bufferedDoodles[1].getImage()
         
         //set up close button
         closeButton.hidden = true
@@ -76,14 +72,30 @@ class DrawViewController: JotViewController {
 
         //set up undo button
         undoButton.hidden = true
-        undoButton.setTitle("Undo", forState: .Normal)
+        if let image = UIImage(named: "undo") {
+            undoButton.setImage(image, forState: .Normal)
+        }
         undoButton.addTarget(self, action: #selector(onUndo), forControlEvents: .TouchUpInside)
         self.view.addSubview(undoButton)
 
         undoButton.snp_makeConstraints { (make) -> Void in
-            make.top.equalTo(self.view).offset(20)
-            make.right.equalTo(self.view).offset(-120)
+            make.top.equalTo(self.view).offset(5)
+            make.right.equalTo(self.view).offset(-145)
         }
+        
+        //set up text button
+        textButton.hidden = true
+        if let image = UIImage(named: "text") {
+            textButton.setImage(image, forState: .Normal)
+        }
+        textButton.addTarget(self, action: #selector(onText), forControlEvents: .TouchUpInside)
+        self.view.addSubview(textButton)
+        
+        textButton.snp_makeConstraints { (make) -> Void in
+            make.top.equalTo(self.view).offset(8)
+            make.right.equalTo(self.view).offset(-100)
+        }
+
 
         //set up stroke button
         strokeButton.hidden = true
@@ -116,7 +128,7 @@ class DrawViewController: JotViewController {
 
 
         //set up color slider
-        let colorSliderWidth = CGFloat(12)
+        let colorSliderWidth = CGFloat(25)
         let colorSliderHeight = CGFloat(150)
         let colorSliderPadding = CGFloat(15)
 
@@ -130,24 +142,29 @@ class DrawViewController: JotViewController {
         self.view.addSubview(colorSlider)
 
         //set up draw buttons
-        drawButton.setTitle("Draw", forState: .Normal)
+        if let image = UIImage(named: "can-menu") {
+            drawButton.setImage(image, forState: .Normal)
+        }
+
         drawButton.addTarget(self, action: #selector(onDraw), forControlEvents: .TouchUpInside)
         self.view.addSubview(drawButton)
 
         drawButton.snp_makeConstraints { (make) -> Void in
-            make.bottom.equalTo(self.view).offset(-20)
+            make.bottom.equalTo(self.view).offset(0)
             make.centerX.equalTo(self.view)
             //make.bottom.equalTo()(self.view).with().offset()(-4.0)
         }
 
         //set up send button
         sendButton.hidden = true
-        sendButton.setTitle("Send", forState: .Normal)
+        if let image = UIImage(named: "tag") {
+            sendButton.setImage(image, forState: .Normal)
+        }
         sendButton.addTarget(self, action: #selector(onSend), forControlEvents: .TouchUpInside)
         self.view.addSubview(sendButton)
         sendButton.snp_makeConstraints { (make) -> Void in
-            make.bottom.equalTo(self.view).offset(-20)
-            make.right.equalTo(self.view).offset(-20)
+            make.bottom.equalTo(self.view).offset(10)
+            make.right.equalTo(self.view).offset(10)
         }
 
         //set up save button
@@ -170,16 +187,24 @@ class DrawViewController: JotViewController {
             self.bufferedDoodles.append(doodle)
         }
 
-        requestDoodles()
+        //requestDoodles()
+        self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(DrawViewController.requestDoodles), userInfo: nil, repeats: true)
     }
 
     /* Makes an async request to the server asking for all nearby doodles and adds them to the
     *  bufferedDoodles. Needs to be called again when we exhaust all the doodles
     */
     func requestDoodles() {
+        //print("Getting doodles")
+        self.bufferedDoodles.removeAll()
         requestManager!.getDoodles(self.updatePictureBlock, semaphore: self.gettingDoodlesSemaphore)
         dispatch_semaphore_wait(self.gettingDoodlesSemaphore, DISPATCH_TIME_FOREVER)
-        self.imageView?.image = self.bufferedDoodles[1].getImage()
+        if(self.bufferedDoodles.count >= 1)
+        {
+            self.imageView?.image = self.bufferedDoodles[0].getImage()
+        }else{
+            self.imageView?.image = nil
+        }
     }
 
     @IBAction func onDraw(sender: AnyObject) {
@@ -230,6 +255,10 @@ class DrawViewController: JotViewController {
         self.state = JotViewState.Default
         self.onClose(NSNull)
     }
+    
+    @IBAction func onText(sender: AnyObject) {
+        self.state = JotViewState.EditingText
+    }
 
     @IBAction func onClose(sender: AnyObject) {
         self.clearAll()
@@ -258,6 +287,7 @@ class DrawViewController: JotViewController {
 
     @IBAction func onColor(sender: AnyObject) {
         colorSlider.hidden = !(colorSlider.hidden)
+        self.state = JotViewState.Drawing
     }
 
     func toggleDrawing() {
@@ -268,6 +298,7 @@ class DrawViewController: JotViewController {
         undoButton.hidden = !(undoButton.hidden)
         colorButton.hidden = !(colorButton.hidden)
         sendButton.hidden = !(sendButton.hidden)
+        textButton.hidden = !(textButton.hidden)
     }
 
 
