@@ -142,9 +142,7 @@ class DrawViewController: JotViewController {
 
         self.requestManager = RequestManager()
         self.updatePictureBlock = {(doodle: Doodle) -> Void in
-            dispatch_async(dispatch_get_main_queue(), {
-                self.bufferedDoodles.append(doodle)
-            })
+            self.bufferedDoodles.append(doodle)
         }
         
         requestDoodles()
@@ -154,8 +152,9 @@ class DrawViewController: JotViewController {
     *  bufferedDoodles. Needs to be called again when we exhaust all the doodles
     */
     func requestDoodles() {
-        requestManager!.getDoodle(self.updatePictureBlock, semaphore: self.gettingDoodlesSemaphore)
-        dispatch_semaphore_wait(self.gettingDoodlesSemaphore, dispatch_time(DISPATCH_TIME_NOW, self.kSemaphoreWaitTime))
+        requestManager!.getDoodles(self.updatePictureBlock, semaphore: self.gettingDoodlesSemaphore)
+        dispatch_semaphore_wait(self.gettingDoodlesSemaphore, DISPATCH_TIME_FOREVER)
+        self.imageView?.image = self.bufferedDoodles[1].getImage()
     }
 
     @IBAction func onDraw(sender: AnyObject) {
@@ -179,10 +178,7 @@ class DrawViewController: JotViewController {
     @IBAction func onSend(sender: AnyObject) {
         let scale = UIScreen.mainScreen().scale
         let doodle: UIImage = self.renderImageWithScale(scale)
-        if let data = UIImagePNGRepresentation(doodle)
-        {
-            self.requestManager!.tagDoodle(data)
-        }
+        self.requestManager!.tagDoodle(doodle)
         self.state = JotViewState.Default
         self.onClose(NSNull)
     }
