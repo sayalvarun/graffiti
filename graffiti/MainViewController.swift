@@ -30,11 +30,11 @@ class MainViewController: UIViewController, JotViewControllerDelegate {
         let devices = AVCaptureDevice.devices()
         
         // Loop through all the capture devices on this phone
-        for device in devices {
+        for device in devices! {
             // Make sure this particular device supports video
-            if (device.hasMediaType(AVMediaTypeVideo)) {
+            if ((device as AnyObject).hasMediaType(AVMediaTypeVideo)) {
                 // Finally check the position and confirm we've got the back camera
-                if(device.position == AVCaptureDevicePosition.Back) {
+                if((device as AnyObject).position == AVCaptureDevicePosition.back) {
                     captureDevice = device as? AVCaptureDevice
                     if captureDevice != nil {
                         beginSession()
@@ -46,7 +46,7 @@ class MainViewController: UIViewController, JotViewControllerDelegate {
         //add drawing view
         self.addChildViewController(drawViewController)
         self.view.addSubview(drawViewController.view)
-        drawViewController.didMoveToParentViewController(self)
+        drawViewController.didMove(toParentViewController: self)
         drawViewController.view.frame = self.view.frame
     }
     
@@ -58,7 +58,7 @@ class MainViewController: UIViewController, JotViewControllerDelegate {
             var maxFps: Double = 0
             for vFormat in device.formats
             {
-                var ranges      = vFormat.videoSupportedFrameRateRanges as!  [AVFrameRateRange]
+                var ranges      = (vFormat as AnyObject).videoSupportedFrameRateRanges as!  [AVFrameRateRange]
                 let frameRates  = ranges[0]
                 if frameRates.maxFrameRate >= maxFps && frameRates.maxFrameRate <= 60
                 {
@@ -73,21 +73,21 @@ class MainViewController: UIViewController, JotViewControllerDelegate {
                 print("error locking phone")
             }
             device.activeFormat = finalFormat
-            device.focusMode = .ContinuousAutoFocus
+            device.focusMode = .continuousAutoFocus
             device.unlockForConfiguration()
         }
     }
     
     func takeScreenshot() -> UIImage {
-        let layer = UIApplication.sharedApplication().keyWindow!.layer
-        let scale = UIScreen.mainScreen().scale
+        let layer = UIApplication.shared.keyWindow!.layer
+        let scale = UIScreen.main.scale
         UIGraphicsBeginImageContextWithOptions(layer.frame.size, false, scale);
         
-        layer.renderInContext(UIGraphicsGetCurrentContext()!)
+        layer.render(in: UIGraphicsGetCurrentContext()!)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        return image
+        return image!
     }
     
     func beginSession() {
@@ -98,7 +98,7 @@ class MainViewController: UIViewController, JotViewControllerDelegate {
             try captureSession.addInput(AVCaptureDeviceInput(device: captureDevice))
             captureSession.sessionPreset = AVCaptureSessionPresetPhoto
         } catch {
-            print(err?.localizedDescription)
+            print(err?.localizedDescription ?? "error")
         }
         if err != nil {
             print("error: \(err?.localizedDescription)")

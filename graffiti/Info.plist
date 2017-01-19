@@ -41,6 +41,13 @@
 	</dict>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>We need your location to show you Graffiti around you</string>
+    <!-- 🏊 Motion -->
+    <key>NSMotionUsageDescription</key>
+    <string> motion use</string>
+    <!-- 📷 Camera -->
+    <key>NSCameraUsageDescription</key>
+    <string> camera use</string>
+    
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>

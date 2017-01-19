@@ -14,8 +14,12 @@ import CoreMotion
 
 class RequestManager: NSObject,CLLocationManagerDelegate {
     
-    var config : NSURLSessionConfiguration?
-    var session: NSURLSession?
+    private static var __once: () = {
+            Static.sharedInstance = RequestManager()
+        }()
+    
+    var config : URLSessionConfiguration?
+    var session: URLSession?
     let locationManager = CLLocationManager()
     let motionManager = CMMotionManager()
     
@@ -24,22 +28,20 @@ class RequestManager: NSObject,CLLocationManagerDelegate {
     var direction: CLLocationDirection?
     var attitude: CMAttitude?
     
+    struct Static {
+        static var token : Int = 0
+        static var sharedInstance : RequestManager? = nil
+    }
+    
     class var sharedInstance : RequestManager {
-        struct Static {
-            static var token : dispatch_once_t = 0
-            static var sharedInstance : RequestManager? = nil
-        }
-        
-        dispatch_once(&Static.token) {
-            Static.sharedInstance = RequestManager()
-        }
+        _ = RequestManager.__once
         return Static.sharedInstance!
     }
     
     override init() {
         super.init()
-        config = NSURLSessionConfiguration.defaultSessionConfiguration()
-        session = NSURLSession(configuration: config!)
+        config = URLSessionConfiguration.default
+        session = URLSession(configuration: config!)
         
         // Get in use gps permissions
         self.locationManager.requestAlwaysAuthorization()
@@ -52,13 +54,15 @@ class RequestManager: NSObject,CLLocationManagerDelegate {
         
         self.motionManager.deviceMotionUpdateInterval = 0.1
         
-        self.motionManager.startDeviceMotionUpdatesToQueue(
-            NSOperationQueue.currentQueue()!, withHandler: {
+        self.motionManager.startDeviceMotionUpdates(
+            to: OperationQueue.current!, withHandler: {
                 (deviceMotion, error) -> Void in
                 
                 if(error == nil) {
                     self.attitude = deviceMotion?.attitude
                 } else {
+                    self.attitude = nil
+                    print("Error: Could not get attitude")
                     //handle the error
                 }
         })
@@ -69,47 +73,47 @@ class RequestManager: NSObject,CLLocationManagerDelegate {
         
     }
     
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let locValue:CLLocationCoordinate2D = manager.location!.coordinate
         self.lat = locValue.latitude
         self.long = locValue.longitude
     }
     
-    func locationManager(manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
         self.direction = newHeading.magneticHeading
     }
     
-    func getPopulatedUrlComponents(path: String) -> NSURLComponents
+    func getPopulatedUrlComponents(_ path: String) -> URLComponents
     {
         // Set up base URL
-        let urlComponents = NSURLComponents()
+        var urlComponents = URLComponents()
         urlComponents.scheme = "http"
-        urlComponents.host = "varunsayal.com"
+        urlComponents.host = "104.236.238.240"
         urlComponents.port = 5000
         urlComponents.path = path
         
         // Create list of url components
         
         
-        print("lat = \(self.lat!), long = \(self.long!), direction = \(self.direction!), aptitude = \(self.attitude!.pitch)")
+        print("lat = \(self.lat!), long = \(self.long!), direction = \(self.direction!),")// aptitude = \(self.attitude!.pitch)")
 
         
-        let latQuery = NSURLQueryItem(name: "lat", value: String(self.lat!))
-        let longQuery = NSURLQueryItem(name: "long", value: String(self.long!))
-        let directionQuery = NSURLQueryItem(name: "direction", value: String(self.direction!))
-        let orientationQuery = NSURLQueryItem(name: "orientation", value: String(self.attitude!.pitch))
+        let latQuery = URLQueryItem(name: "lat", value: String(self.lat!))
+        let longQuery = URLQueryItem(name: "long", value: String(self.long!))
+        let directionQuery = URLQueryItem(name: "direction", value: String(self.direction!))
+        let orientationQuery = URLQueryItem(name: "orientation", value: String(self.attitude!.pitch))
         
         urlComponents.queryItems = [latQuery, longQuery, directionQuery, orientationQuery]
 
         return urlComponents
     }
     
-    func vote(id: Int32, up: Bool)
+    func vote(_ id: Int32, up: Bool)
     {
         // Set up base URL
-        let urlComponents = NSURLComponents()
+        var urlComponents = URLComponents()
         urlComponents.scheme = "http"
-        urlComponents.host = "varunsayal.com"
+        urlComponents.host = "104.236.238.240"
         urlComponents.port = 5000
         if(up){
             urlComponents.path = "/upvote"
@@ -117,16 +121,16 @@ class RequestManager: NSObject,CLLocationManagerDelegate {
             urlComponents.path = "/downvote"
         }
         
-        let idQuery = NSURLQueryItem(name: "id", value: String(id))
+        let idQuery = URLQueryItem(name: "id", value: String(id))
         urlComponents.queryItems = [idQuery]
         
-        guard let upvoteUrl = urlComponents.URL else {
+        guard let upvoteUrl = urlComponents.url else {
             print("Error: cannot create URL")
             return
         }
         
-        let urlRequest = NSURLRequest(URL: upvoteUrl)
-        let task = self.session!.dataTaskWithRequest(urlRequest) {
+        let urlRequest = URLRequest(url: upvoteUrl)
+        let task = self.session!.dataTask(with: urlRequest, completionHandler: {
             (data, response, error) in
             // check for any errors
             guard error == nil else {
@@ -135,33 +139,33 @@ class RequestManager: NSObject,CLLocationManagerDelegate {
                 return
             }
             
-        }
+        }) 
         
         task.resume()
         
     }
     
-    func getDoodles(action: (doodle: Doodle) -> Void, semaphore: dispatch_semaphore_t) {
+    func getDoodles(_ action: @escaping (_ doodle: Doodle) -> Void, semaphore: DispatchSemaphore) {
         
-        let urlComponents : NSURLComponents = getPopulatedUrlComponents("/doodle")
+        let urlComponents : URLComponents = getPopulatedUrlComponents("/doodle")
         
         if (urlComponents.queryItems == nil) // Never setup params
         {
-            dispatch_semaphore_signal(semaphore)
+            semaphore.signal()
         }
         
-        guard let getDoodlesUrl = urlComponents.URL else {
+        guard let getDoodlesUrl = urlComponents.url else {
             print("Error: cannot create URL")
             return
         }
         
-        let urlRequest = NSURLRequest(URL: getDoodlesUrl)
-        let task = self.session!.dataTaskWithRequest(urlRequest) {
+        let urlRequest = URLRequest(url: getDoodlesUrl)
+        let task = self.session!.dataTask(with: urlRequest, completionHandler: {
             (data, response, error) in
             // check for any errors
             guard error == nil else {
                 print("error calling GET on /todos/1")
-                print(error)
+                print(error ?? "error")
                 return
             }
             // make sure we got data
@@ -171,7 +175,7 @@ class RequestManager: NSObject,CLLocationManagerDelegate {
             }
 
             do{
-                let json = try NSJSONSerialization.JSONObjectWithData(responseData, options: .AllowFragments)
+                let json = try JSONSerialization.jsonObject(with: responseData, options: .allowFragments)  as! [String:AnyObject]
                 
                 let entries = json["entries"]
                 
@@ -180,17 +184,17 @@ class RequestManager: NSObject,CLLocationManagerDelegate {
                     let doodleID = entry["id"]
                     let payload = entry["payload"]
                     
-                    guard let decodedData = NSData(base64EncodedString: String(payload), options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters) else{
+                    guard let decodedData = Data(base64Encoded: String(describing: payload), options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) else{
                         print("Error: Decoding from base64")
                         return
                     }
                     
                     let headeroffset = 6 // constant 6 bytes are prepended to payload
-                    let realDecodedData = NSData(bytes: decodedData.bytes+headeroffset, length:decodedData.length-headeroffset)
+                    let realDecodedData = Data(bytes: UnsafePointer<UInt8>((decodedData as NSData).bytes.assumingMemoryBound(to: UInt8.self)+headeroffset), count:decodedData.count-headeroffset)
                     
                     if let image = UIImage(data: realDecodedData, scale: 1.0)
                     {
-                        action(doodle: Doodle(id: Int32(String(doodleID!))!, image: image))
+                        action(Doodle(id: Int32(String(describing: doodleID!))!, image: image))
                     }else{
                         print("Error: Could not make image")
                     }
@@ -200,33 +204,33 @@ class RequestManager: NSObject,CLLocationManagerDelegate {
                 print("Error making to json: \(error)")
             }
             
-            dispatch_semaphore_signal(semaphore)
+            semaphore.signal()
             
-        }
+        }) 
         task.resume()
     }
     
-    func tagDoodle(imageInView: UIImage){
+    func tagDoodle(_ imageInView: UIImage){
         
-        let urlComponents : NSURLComponents = getPopulatedUrlComponents("/tag")
+        let urlComponents : URLComponents = getPopulatedUrlComponents("/tag")
         
         if (urlComponents.queryItems == nil) // Never setup params
         {
             return
         }
         
-        guard let tagUrl = urlComponents.URL else {
+        guard let tagUrl = urlComponents.url else {
             print("Error: cannot create URL")
             return
         }
         
-        let doodleRequest = NSMutableURLRequest(URL: tagUrl)
-        doodleRequest.HTTPMethod = "POST"
+        let doodleRequest = NSMutableURLRequest(url: tagUrl)
+        doodleRequest.httpMethod = "POST"
         
         doodleRequest.setValue("application/octet-stream", forHTTPHeaderField: "Content-Type")
-        doodleRequest.HTTPBody = UIImagePNGRepresentation(imageInView)
+        doodleRequest.httpBody = UIImagePNGRepresentation(imageInView)
         
-        let task = self.session!.dataTaskWithRequest(doodleRequest) {
+        let task = self.session!.dataTask(with: doodleRequest as URLRequest, completionHandler: {
             (data, response, error) in
             guard let responseData = data else {
                 print("Error: did not receive data")
@@ -238,10 +242,10 @@ class RequestManager: NSObject,CLLocationManagerDelegate {
                 return
             }
             
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 print(responseData)
             })
-        }
+        }) 
         task.resume()
     }
 

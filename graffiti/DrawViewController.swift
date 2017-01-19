@@ -16,34 +16,34 @@ import Toast_Swift
 class DrawViewController: JotViewController {
 
     //drawing variables
-    let drawButton: UIButton = UIButton(type: .Custom)
-    let saveButton: UIButton = UIButton(type: .Custom)
-    let textButton: UIButton = UIButton(type: .Custom)
-    let closeButton: UIButton = UIButton(type: .Custom)
-    let undoButton: UIButton = UIButton(type: .Custom)
-    let sendButton: UIButton = UIButton(type: .Custom)
+    let drawButton: UIButton = UIButton(type: .custom)
+    let saveButton: UIButton = UIButton(type: .custom)
+    let textButton: UIButton = UIButton(type: .custom)
+    let closeButton: UIButton = UIButton(type: .custom)
+    let undoButton: UIButton = UIButton(type: .custom)
+    let sendButton: UIButton = UIButton(type: .custom)
     let colorSlider: ColorSlider! = ColorSlider()
-    let voteButton: UIButton = UIButton(type: .Custom)
-    let colorButton: UIButton = UIButton(type: .Custom)
-    let strokeButton: UIButton = UIButton(type: .Custom)
+    let voteButton: UIButton = UIButton(type: .custom)
+    let colorButton: UIButton = UIButton(type: .custom)
+    let strokeButton: UIButton = UIButton(type: .custom)
     let strokeImages: [UIImage] = [
-        UIImage(named: "stroke-1")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate),
-        UIImage(named: "stroke-2")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate),
-        UIImage(named: "stroke-3")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate),
-        UIImage(named: "stroke-4")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate),
+        UIImage(named: "stroke-1")!.withRenderingMode(UIImageRenderingMode.alwaysTemplate),
+        UIImage(named: "stroke-2")!.withRenderingMode(UIImageRenderingMode.alwaysTemplate),
+        UIImage(named: "stroke-3")!.withRenderingMode(UIImageRenderingMode.alwaysTemplate),
+        UIImage(named: "stroke-4")!.withRenderingMode(UIImageRenderingMode.alwaysTemplate),
     ]
     var strokeIndex = 1
 
     //graffiti variables
     var requestManager: RequestManager?
-    var updatePictureBlock:(doodle: Doodle)->Void = { arg in }
+    var updatePictureBlock:(_ doodle: Doodle)->Void = { arg in }
     var imageView : UIImageView =  UIImageView(frame: CGRect(x: 75, y: 150, width: 200, height: 400))
     var currentDoodleID : Int32 = -1 // Stores the id of the doodle on the screen if any
     var bufferedDoodles : [Doodle] = []
-    var gettingDoodlesSemaphore : dispatch_semaphore_t = dispatch_semaphore_create(0)
+    var gettingDoodlesSemaphore : DispatchSemaphore = DispatchSemaphore(value: 0)
     let kSemaphoreWaitTime : Int64 = 15 // Wait for 15 seconds for the semaphore
     
-    var timer = NSTimer()
+    var timer = Timer()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,12 +61,12 @@ class DrawViewController: JotViewController {
         self.view.addSubview(imageView)
 
         //set up close button
-        closeButton.hidden = true
+        closeButton.isHidden = true
         if let image = UIImage(named: "close") {
-            closeButton.setImage(image, forState: .Normal)
+            closeButton.setImage(image, for: UIControlState())
         }
 
-        closeButton.addTarget(self, action: #selector(onClose), forControlEvents: .TouchUpInside)
+        closeButton.addTarget(self, action: #selector(onClose), for: .touchUpInside)
         self.view.addSubview(closeButton)
 
         closeButton.snp_makeConstraints { (make) -> Void in
@@ -75,11 +75,11 @@ class DrawViewController: JotViewController {
         }
 
         //set up undo button
-        undoButton.hidden = true
+        undoButton.isHidden = true
         if let image = UIImage(named: "undo") {
-            undoButton.setImage(image, forState: .Normal)
+            undoButton.setImage(image, for: UIControlState())
         }
-        undoButton.addTarget(self, action: #selector(onUndo), forControlEvents: .TouchUpInside)
+        undoButton.addTarget(self, action: #selector(onUndo), for: .touchUpInside)
         self.view.addSubview(undoButton)
 
         undoButton.snp_makeConstraints { (make) -> Void in
@@ -88,11 +88,11 @@ class DrawViewController: JotViewController {
         }
         
         //set up text button
-        textButton.hidden = true
+        textButton.isHidden = true
         if let image = UIImage(named: "text") {
-            textButton.setImage(image, forState: .Normal)
+            textButton.setImage(image, for: UIControlState())
         }
-        textButton.addTarget(self, action: #selector(onText), forControlEvents: .TouchUpInside)
+        textButton.addTarget(self, action: #selector(onText), for: .touchUpInside)
         self.view.addSubview(textButton)
         
         textButton.snp_makeConstraints { (make) -> Void in
@@ -102,10 +102,10 @@ class DrawViewController: JotViewController {
         
         //set up text button
         if let image = UIImage(named: "vote") {
-            voteButton.setImage(image, forState: .Normal)
+            voteButton.setImage(image, for: UIControlState())
         }
-        voteButton.hidden = true
-        voteButton.addTarget(self, action: #selector(upVote), forControlEvents: .TouchUpInside)
+        voteButton.isHidden = true
+        voteButton.addTarget(self, action: #selector(upVote), for: .touchUpInside)
         self.view.addSubview(voteButton)
         
         voteButton.snp_makeConstraints { (make) -> Void in
@@ -114,9 +114,9 @@ class DrawViewController: JotViewController {
         }
         
         //set up stroke button
-        strokeButton.hidden = true
-        strokeButton.setImage(strokeImages[1], forState: .Normal)
-        strokeButton.addTarget(self, action: #selector(onStrokeChange), forControlEvents: .TouchUpInside)
+        strokeButton.isHidden = true
+        strokeButton.setImage(strokeImages[1], for: UIControlState())
+        strokeButton.addTarget(self, action: #selector(onStrokeChange), for: .touchUpInside)
         self.view.addSubview(strokeButton)
 
         strokeButton.snp_makeConstraints { (make) -> Void in
@@ -125,15 +125,15 @@ class DrawViewController: JotViewController {
         }
 
         //set up color buttons
-        colorButton.hidden = true
+        colorButton.isHidden = true
         if let image = UIImage(named: "spray-can") {
-            colorButton.setImage(image, forState: .Normal)
+            colorButton.setImage(image, for: UIControlState())
         }
-        colorButton.backgroundColor = UIColor.clearColor()
-        colorButton.addTarget(self, action: #selector(onColor), forControlEvents: .TouchUpInside)
+        colorButton.backgroundColor = UIColor.clear
+        colorButton.addTarget(self, action: #selector(onColor), for: .touchUpInside)
         colorButton.layer.cornerRadius = 5
         colorButton.layer.borderWidth = 2
-        colorButton.layer.borderColor = UIColor.whiteColor().CGColor
+        colorButton.layer.borderColor = UIColor.white.cgColor
 
         self.view.addSubview(colorButton)
 
@@ -148,21 +148,21 @@ class DrawViewController: JotViewController {
         let colorSliderHeight = CGFloat(150)
         let colorSliderPadding = CGFloat(15)
 
-        colorSlider.frame = CGRectMake(view.bounds.width - colorSliderWidth - colorSliderPadding - 5, 50 + colorSliderPadding, colorSliderWidth, colorSliderHeight)
-        colorSlider.hidden = true
-        colorSlider.addTarget(self, action: #selector(changedColor), forControlEvents: .ValueChanged)
-        colorSlider.addTarget(self, action: #selector(changedColor), forControlEvents: .TouchUpInside)
+        colorSlider.frame = CGRect(x: view.bounds.width - colorSliderWidth - colorSliderPadding - 5, y: 50 + colorSliderPadding, width: colorSliderWidth, height: colorSliderHeight)
+        colorSlider.isHidden = true
+        colorSlider.addTarget(self, action: #selector(changedColor), for: .valueChanged)
+        colorSlider.addTarget(self, action: #selector(changedColor), for: .touchUpInside)
 
         colorSlider.borderWidth = 2.0
-        colorSlider.borderColor = UIColor.whiteColor()
+        colorSlider.borderColor = UIColor.white
         self.view.addSubview(colorSlider)
 
         //set up draw buttons
         if let image = UIImage(named: "can-menu") {
-            drawButton.setImage(image, forState: .Normal)
+            drawButton.setImage(image, for: UIControlState())
         }
 
-        drawButton.addTarget(self, action: #selector(onDraw), forControlEvents: .TouchUpInside)
+        drawButton.addTarget(self, action: #selector(onDraw), for: .touchUpInside)
         self.view.addSubview(drawButton)
 
         drawButton.snp_makeConstraints { (make) -> Void in
@@ -172,11 +172,11 @@ class DrawViewController: JotViewController {
         }
 
         //set up send button
-        sendButton.hidden = true
+        sendButton.isHidden = true
         if let image = UIImage(named: "tag") {
-            sendButton.setImage(image, forState: .Normal)
+            sendButton.setImage(image, for: UIControlState())
         }
-        sendButton.addTarget(self, action: #selector(onSend), forControlEvents: .TouchUpInside)
+        sendButton.addTarget(self, action: #selector(onSend), for: .touchUpInside)
         self.view.addSubview(sendButton)
         sendButton.snp_makeConstraints { (make) -> Void in
             make.bottom.equalTo(self.view).offset(10)
@@ -184,12 +184,12 @@ class DrawViewController: JotViewController {
         }
 
         //set up save button
-        saveButton.hidden = true
+        saveButton.isHidden = true
         if let image = UIImage(named: "download") {
-            saveButton.setImage(image, forState: .Normal)
+            saveButton.setImage(image, for: UIControlState())
         }
 
-        saveButton.addTarget(self, action: #selector(onSave), forControlEvents: .TouchUpInside)
+        saveButton.addTarget(self, action: #selector(onSave), for: .touchUpInside)
         self.view.addSubview(saveButton)
 
         saveButton.snp_makeConstraints { (make) -> Void in
@@ -200,14 +200,14 @@ class DrawViewController: JotViewController {
         //set state of drawing view
         //intentionally made it 5 so its nil and cannot be interacted with
         self.state = JotViewState.init(rawValue: 5)!
-        self.drawingColor = UIColor.redColor()
+        self.drawingColor = UIColor.red
         self.requestManager = RequestManager()
         self.updatePictureBlock = {(doodle: Doodle) -> Void in
             self.bufferedDoodles.append(doodle)
         }
 
         //requestDoodles()
-        self.timer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: #selector(DrawViewController.requestDoodles), userInfo: nil, repeats: true)
+        self.timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(DrawViewController.requestDoodles), userInfo: nil, repeats: true)
     }
 
     /* Makes an async request to the server asking for all nearby doodles and adds them to the
@@ -216,33 +216,33 @@ class DrawViewController: JotViewController {
     func requestDoodles() {
         self.bufferedDoodles.removeAll()
         requestManager!.getDoodles(self.updatePictureBlock, semaphore: self.gettingDoodlesSemaphore)
-        dispatch_semaphore_wait(self.gettingDoodlesSemaphore, DISPATCH_TIME_FOREVER)
+        self.gettingDoodlesSemaphore.wait(timeout: DispatchTime.distantFuture)
         print("Number of doodles = \(self.bufferedDoodles.count)")
-        if(self.state == JotViewState.Default || self.state.rawValue == 5){
+        if(self.state == JotViewState.default || self.state.rawValue == 5){
             if(self.bufferedDoodles.count >= 1) // We are in a state of viewing
             {
-                voteButton.hidden = false
+                voteButton.isHidden = false
                 self.imageView.image = self.bufferedDoodles[0].getImage()
                 self.currentDoodleID = self.bufferedDoodles[0].getID()
             }
             else {
                 self.imageView.image = nil
-                voteButton.hidden = true
+                voteButton.isHidden = true
             }
         }
     }
 
-    @IBAction func onDraw(sender: AnyObject) {
-        colorButton.backgroundColor = UIColor.redColor()
-        strokeButton.imageView?.tintColor = UIColor.redColor()
+    @IBAction func onDraw(_ sender: AnyObject) {
+        colorButton.backgroundColor = UIColor.red
+        strokeButton.imageView?.tintColor = UIColor.red
         imageView.image = nil
-        voteButton.hidden = true
-        self.state = JotViewState.Drawing
+        voteButton.isHidden = true
+        self.state = JotViewState.drawing
         self.toggleDrawing()
         print(self.state.rawValue)
     }
     
-    @IBAction func onSave(sender: AnyObject) {
+    @IBAction func onSave(_ sender: AnyObject) {
         /*let photoImage: UIImage!
         var camera: UIImage!
 
@@ -254,11 +254,11 @@ class DrawViewController: JotViewController {
 
         photoImage = camera*/
 
-        let layer = UIApplication.sharedApplication().keyWindow!.layer
-        let scale = UIScreen.mainScreen().scale
+        let layer = UIApplication.shared.keyWindow!.layer
+        let scale = UIScreen.main.scale
 
         UIGraphicsBeginImageContextWithOptions(layer.frame.size, false, scale);
-            layer.renderInContext(UIGraphicsGetCurrentContext()!)
+            layer.render(in: UIGraphicsGetCurrentContext()!)
             let screenshot = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
 
@@ -269,30 +269,30 @@ class DrawViewController: JotViewController {
             //let combinedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()
         //UIGraphicsEndImageContext()
 
-        UIImageWriteToSavedPhotosAlbum(screenshot, nil, nil, nil)
+        UIImageWriteToSavedPhotosAlbum(screenshot!, nil, nil, nil)
         self.view.makeToast("Screenshot saved!")
     }
 
-    @IBAction func onSend(sender: AnyObject) {
-        let scale = UIScreen.mainScreen().scale
-        let doodle: UIImage = self.renderImageWithScale(scale)
+    @IBAction func onSend(_ sender: AnyObject) {
+        let scale = UIScreen.main.scale
+        let doodle: UIImage = self.renderImage(withScale: scale)
         self.requestManager!.tagDoodle(doodle)
-        colorSlider.hidden = true
-        colorButton.backgroundColor = UIColor.clearColor()
+        colorSlider.isHidden = true
+        colorButton.backgroundColor = UIColor.clear
         self.view.makeToast("Tag created!")
-        self.state = JotViewState.Default
-        self.onClose(NSNull)
+        self.state = JotViewState.default
+        self.onClose(NSNull.self)
     }
     
-    @IBAction func onText(sender: AnyObject) {
-        self.state = JotViewState.EditingText
+    @IBAction func onText(_ sender: AnyObject) {
+        self.state = JotViewState.editingText
     }
 
-    @IBAction func onClose(sender: AnyObject) {
+    @IBAction func onClose(_ sender: AnyObject) {
         self.clearAll()
-        colorSlider.hidden = true
-        colorButton.backgroundColor = UIColor.clearColor()
-        self.state = JotViewState.Default
+        colorSlider.isHidden = true
+        colorButton.backgroundColor = UIColor.clear
+        self.state = JotViewState.default
         self.toggleDrawing()
     }
 
@@ -303,11 +303,11 @@ class DrawViewController: JotViewController {
         }
     }
     
-    @IBAction func onUndo(sender: AnyObject) {
+    @IBAction func onUndo(_ sender: AnyObject) {
         self.undo()
     }
 
-    @IBAction func onStrokeChange(sender: AnyObject) {
+    @IBAction func onStrokeChange(_ sender: AnyObject) {
         self.drawingStrokeWidth = self.drawingStrokeWidth + 5.0
         strokeIndex += 1
         if(self.drawingStrokeWidth > 20.0) {
@@ -316,28 +316,28 @@ class DrawViewController: JotViewController {
         if(strokeIndex > 3) {
             strokeIndex = 0
         }
-        strokeButton.setImage(strokeImages[strokeIndex], forState: .Normal)
+        strokeButton.setImage(strokeImages[strokeIndex], for: UIControlState())
 
     }
 
-    @IBAction func onColor(sender: AnyObject) {
-        colorSlider.hidden = !(colorSlider.hidden)
-        self.state = JotViewState.Drawing
+    @IBAction func onColor(_ sender: AnyObject) {
+        colorSlider.isHidden = !(colorSlider.isHidden)
+        self.state = JotViewState.drawing
     }
 
     func toggleDrawing() {
-        drawButton.hidden = !(drawButton.hidden)
-        saveButton.hidden = !(saveButton.hidden)
-        strokeButton.hidden = !(strokeButton.hidden)
-        closeButton.hidden = !(closeButton.hidden)
-        undoButton.hidden = !(undoButton.hidden)
-        colorButton.hidden = !(colorButton.hidden)
-        sendButton.hidden = !(sendButton.hidden)
-        textButton.hidden = !(textButton.hidden)
+        drawButton.isHidden = !(drawButton.isHidden)
+        saveButton.isHidden = !(saveButton.isHidden)
+        strokeButton.isHidden = !(strokeButton.isHidden)
+        closeButton.isHidden = !(closeButton.isHidden)
+        undoButton.isHidden = !(undoButton.isHidden)
+        colorButton.isHidden = !(colorButton.isHidden)
+        sendButton.isHidden = !(sendButton.isHidden)
+        textButton.isHidden = !(textButton.isHidden)
     }
 
 
-    func changedColor(slider: ColorSlider) {
+    func changedColor(_ slider: ColorSlider) {
         self.drawingColor = slider.color
         strokeButton.imageView?.tintColor = slider.color
         colorButton.backgroundColor = colorSlider.color
